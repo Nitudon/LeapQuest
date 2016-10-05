@@ -1,0 +1,149 @@
+fileFormatVersion: 2
+guid: 7c32a7e25e7d7454897c25105494fbc0
+timeCreated: 1472110479
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: anzu
+    100002: //RootNode
+    100004: arm1_L
+    100006: arm1_R
+    100008: arm2_L
+    100010: arm2_L_end
+    100012: arm2_R
+    100014: arm2_R_end
+    100016: Armature
+    100018: Camera
+    100020: foot_L
+    100022: foot_L_end
+    100024: foot_R
+    100026: foot_R_end
+    100028: handle_L
+    100030: handle_R
+    100032: head
+    100034: head_end
+    100036: hip_L
+    100038: hip_L.001
+    100040: hip_L.001_end
+    100042: hip_R
+    100044: Lamp
+    100046: leg1_L
+    100048: leg1_R
+    100050: leg2_L
+    100052: leg2_L_end
+    100054: leg2_R
+    100056: leg2_R_end
+    100058: master_born
+    100060: master_born_end
+    100062: neck
+    100064: sholder_L
+    100066: sholder_R
+    100068: UpperBody1
+    100070: UpperBody2
+    400000: //RootNode
+    400002: anzu
+    400004: arm1_L
+    400006: arm1_R
+    400008: arm2_L
+    400010: arm2_L_end
+    400012: arm2_R
+    400014: arm2_R_end
+    400016: Armature
+    400018: Camera
+    400020: foot_L
+    400022: foot_L_end
+    400024: foot_R
+    400026: foot_R_end
+    400028: handle_L
+    400030: handle_R
+    400032: head
+    400034: head_end
+    400036: hip_L
+    400038: hip_L.001
+    400040: hip_L.001_end
+    400042: hip_R
+    400044: Lamp
+    400046: leg1_L
+    400048: leg1_R
+    400050: leg2_L
+    400052: leg2_L_end
+    400054: leg2_R
+    400056: leg2_R_end
+    400058: master_born
+    400060: master_born_end
+    400062: neck
+    400064: sholder_L
+    400066: sholder_R
+    400068: UpperBody1
+    400070: UpperBody2
+    4300000: anzu
+    7400000: Armature|ArmatureAction
+    7400002: Armature|sample_motion
+    7400004: anzu|sample_motion
+    9500000: //RootNode
+    13700000: anzu
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
