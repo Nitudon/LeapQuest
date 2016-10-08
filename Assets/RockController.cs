@@ -37,6 +37,7 @@ public class RockController : MonoBehaviour {
         {
             _path = new Vector3[] { intercept, enemyPos };
         }
+
         return _path;
     }
 
@@ -46,7 +47,7 @@ public class RockController : MonoBehaviour {
         {
             gameObject.transform.DOKill();
             Destroy(gameObject);
-            CharacterManager.Instance.PlayerDamage(1);
+            PlayerUIManager.Instance.LifeAffect(1);
         }
 
         else if(collider.tag == "Hand")
@@ -61,7 +62,6 @@ public class RockController : MonoBehaviour {
         {
             gameObject.transform.DOKill();
             Destroy(gameObject);
-
         }
     }
 

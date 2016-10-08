@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Boss
   - Field
+  - LifeBar
+  - LifeText
+  - PlayerUIManager
   layers:
   - Default
   - TransparentFX

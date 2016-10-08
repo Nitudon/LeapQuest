@@ -22,6 +22,9 @@ public class StepManager : MonoBehaviour {
     [SerializeField]
     private TimeSchedule timeschedule;
 
+    [SerializeField]
+    private AudioManager audioManager;
+
     public IntReactiveProperty BattleStep;
 
     #region[Client]
@@ -74,6 +77,7 @@ public class StepManager : MonoBehaviour {
         {
             EnemyGenerator.gameObject.SetActive(true);
             BattleStep.Value++;
+            audioManager.SoundChange(AudioManager.Music.battle);
         }
 
         else
@@ -88,6 +92,8 @@ public class StepManager : MonoBehaviour {
                     controller.EndTurn();
                 }
             }
+
+            audioManager.SoundChange(AudioManager.Music.walk);
         }
         Player.OnPlayerMove(TimeSchedule[MoveStep++].trigger);
     }

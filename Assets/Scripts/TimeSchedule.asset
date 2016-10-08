@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Name: TimeSchedule
   m_EditorClassIdentifier: 
   times:
-  - 2
-  - 5
-  - 15
-  - 20
+  - 0
+  - 10
   - 30
-  - 35
-  - 60
-  - 89
-  - 114
-  - 117
+  - 40
+  - 70
+  - 80
+  - 110
+  - 120
+  - 150
+  - 160
   triggers:
   - Front
   - Stop

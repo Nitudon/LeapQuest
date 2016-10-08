@@ -11,8 +11,6 @@ public class GuardEnemyController : EnemyAbstractController{
     private bool isAttack = false;
     private ParticleSystem GuardEffect;
 
-    
-
     protected override void Start()
     {
         BEHAVE_TIME = 6f;
@@ -23,16 +21,22 @@ public class GuardEnemyController : EnemyAbstractController{
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (isAttack)
+        if (collision.gameObject.tag == "Hand")
         {
-            base.OnCollisionEnter(collision);
-        }
+            if (isAttack)
+            {
+                base.OnCollisionEnter(collision);
+            }
 
-        else if(collision.gameObject.tag == "Hand")
-        {
-            Guard();
+            else
+            {
+                Guard();
+            }
+
         }
+       
     }
+
     void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.tag == "Hand")
@@ -43,8 +47,9 @@ public class GuardEnemyController : EnemyAbstractController{
 
     protected override void EnemyBehave()
     {
+        isAttack = true;
         _animator.Play("Attack");
-       // EnemyAttack();
+       EnemyAttack();
     }
 
     protected override void EnemyAttack()

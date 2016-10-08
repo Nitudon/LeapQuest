@@ -73,7 +73,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     {
         if(collider.tag == "Player")
         {
-            Player.Instance.LifeAffect(ATTACK_DAMAGE);
+            PlayerUIManager.Instance.LifeAffect(ATTACK_DAMAGE);
         }
     }
 
