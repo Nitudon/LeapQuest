@@ -17,22 +17,17 @@ MonoBehaviour:
     - Enemy: 0
       PlaceX: 0
       PlaceZ: 0
-      Number: 0
     - Enemy: 0
       PlaceX: 1
       PlaceZ: 0
-      Number: 0
     - Enemy: 0
       PlaceX: 2
       PlaceZ: 0
-      Number: 0
-  - Time: 5
+  - Time: 10
     EnemyEntrys:
-    - Enemy: 2
+    - Enemy: 0
       PlaceX: 1
       PlaceZ: 0
-      Number: 0
-    - Enemy: 1
+    - Enemy: 0
       PlaceX: 2
       PlaceZ: 0
-      Number: 0

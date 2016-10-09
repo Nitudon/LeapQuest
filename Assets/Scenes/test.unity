@@ -1273,7 +1273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6de9f17f4afb394b95950314b5cf990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyGenerator: {fileID: 0}
 --- !u!1 &625074777 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 7a188c22e10b64955add56de8af5d9c4, type: 2}
@@ -1346,7 +1345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6de9f17f4afb394b95950314b5cf990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyGenerator: {fileID: 0}
 --- !u!1 &813756344
 GameObject:
   m_ObjectHideFlags: 0

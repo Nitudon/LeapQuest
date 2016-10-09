@@ -16,8 +16,8 @@ public class EnemySpawn {
 
     public enum spawnPlace_X
     {
-        center,
         left,
+        center,
         right,
         random
     }

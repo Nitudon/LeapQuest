@@ -19,15 +19,15 @@ public class EnemyGenerator : MonoBehaviour {
 
     //出現場所
     private readonly Vector3[] GENERATE_POSITIONS_X = new Vector3[]{
-        new Vector3(0.5f,0f,0.5f),
+        new Vector3(-0.3f,0f,0.5f),
         new Vector3(0f,0f,0.5f),
-        new Vector3(-0.5f,0f,0.5f)
+        new Vector3(0.3f,0f,0.5f)
     };
 
     private readonly Vector3[] GENERATE_POSITIONS_Z = new Vector3[]{
-        new Vector3(0.5f,0f,0.2f),
+        new Vector3(-0.5f,0f,0.2f),
         new Vector3(0f,0f,0.2f),
-        new Vector3(-0.5f,0f,0.2f)
+        new Vector3(0.5f,0f,0.2f)
     };
 
     //敵の情報のイニシャライズ
