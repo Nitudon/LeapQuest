@@ -11,6 +11,7 @@ public class PlayerUIManager : MonoBehaviour {
     /// </summary>
     public Player _player;
     private static PlayerUIManager _instance;
+    private Animator _playerAnimator;
     private Image _lifeBar;
     private Text _lifeText;
     
@@ -24,9 +25,10 @@ public class PlayerUIManager : MonoBehaviour {
         }
     }
 
-    //UIオブジェクトの指定
-    public void PlayerUISet()
+    //イニシャライズ
+    public void Init()
     {
+        _player = new Player();
         _lifeBar = GameObject.FindGameObjectWithTag("LifeBar").GetComponent<Image>();
         _lifeText = GameObject.FindGameObjectWithTag("LifeText").GetComponent<Text>();
     }
@@ -40,9 +42,8 @@ public class PlayerUIManager : MonoBehaviour {
             {
                 //Managerオブジェクト検索                
                 _instance = GameObject.FindGameObjectWithTag("PlayerUIManager").GetComponent<PlayerUIManager>();
-                //各イニシャライズ
-                _instance._player = new Player();
-                _instance.PlayerUISet();
+                //イニシャライズ
+                _instance.Init();
                 //ライフ値変動Observer,UI更新
                 _instance._player._life
                     .Skip(1)//初期化の検知をスキップ

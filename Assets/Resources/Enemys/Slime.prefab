@@ -34,7 +34,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013200367270}
-  - 65: {fileID: 65000013993498658}
   - 95: {fileID: 95000013555972374}
   - 54: {fileID: 54000010997227612}
   - 75: {fileID: 75000013890662844}
@@ -71,6 +70,7 @@ GameObject:
   - 4: {fileID: 4000012795056150}
   - 33: {fileID: 33000010258565824}
   - 23: {fileID: 23000012504691838}
+  - 64: {fileID: 64000010198456414}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010888043432}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.05019754, y: -3.7399995, z: -2.1485054}
+  m_LocalPosition: {x: 0.05019754, y: -3.7399995, z: -1.67}
   m_LocalScale: {x: 0.003, y: 0.003, z: 0.003}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -184,18 +184,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65000013993498658
-BoxCollider:
+--- !u!64 &64000010198456414
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010888043432}
+  m_GameObject: {fileID: 1000012914778732}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 32, z: 40}
-  m_Center: {x: 0, y: 16.3, z: 0}
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: 69ff1698ff33cbb4ba0f9bed78ce4e49, type: 3}
 --- !u!75 &75000013890662844
 ConstantForce:
   m_ObjectHideFlags: 1

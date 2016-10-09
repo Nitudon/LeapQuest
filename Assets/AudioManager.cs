@@ -23,9 +23,4 @@ public class AudioManager : MonoBehaviour {
         _audioSource.clip = BackSounds[(int)scene];
         _audioSource.Play();
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

@@ -293,7 +293,7 @@ GameObject:
   - 75: {fileID: 7573778}
   - 114: {fileID: 11492722}
   m_Layer: 0
-  m_Name: anzu 1
+  m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

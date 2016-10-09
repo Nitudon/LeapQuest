@@ -36,6 +36,7 @@ GameObject:
   - 4: {fileID: 4000013297498086}
   - 33: {fileID: 33000010895969282}
   - 23: {fileID: 23000013691850210}
+  - 64: {fileID: 64000011877318886}
   m_Layer: 0
   m_Name: MetalSlime
   m_TagString: Untagged
@@ -69,7 +70,6 @@ GameObject:
   - 95: {fileID: 95000013897479364}
   - 54: {fileID: 54000014010552334}
   - 75: {fileID: 75000013028493332}
-  - 65: {fileID: 65000011260597216}
   - 114: {fileID: 114000010831699900}
   m_Layer: 0
   m_Name: MetalSlime
@@ -184,18 +184,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65000011260597216
-BoxCollider:
+--- !u!64 &64000011877318886
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013730073778}
+  m_GameObject: {fileID: 1000011765543620}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 32, z: 40}
-  m_Center: {x: 0, y: 16.3, z: 0}
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: 31e07295962e77f48b34d6a23df7fb30, type: 3}
 --- !u!75 &75000013028493332
 ConstantForce:
   m_ObjectHideFlags: 1

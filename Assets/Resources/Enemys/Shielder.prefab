@@ -140,6 +140,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010217948352}
   - 137: {fileID: 137000013011266664}
+  - 64: {fileID: 64000012832183724}
   m_Layer: 0
   m_Name: shield
   m_TagString: Untagged
@@ -159,7 +160,6 @@ GameObject:
   - 54: {fileID: 54000012301615234}
   - 75: {fileID: 75000010391926188}
   - 114: {fileID: 114000013804502218}
-  - 65: {fileID: 65000013367853334}
   m_Layer: 0
   m_Name: Shielder
   m_TagString: Untagged
@@ -640,18 +640,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65000013367853334
-BoxCollider:
+--- !u!64 &64000012832183724
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012188772280}
+  m_GameObject: {fileID: 1000012111975556}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12, y: 15, z: 12}
-  m_Center: {x: -0.52, y: 7.54, z: 0.21}
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: d348dc72707a4e146893d2b7060be822, type: 3}
 --- !u!75 &75000010391926188
 ConstantForce:
   m_ObjectHideFlags: 1

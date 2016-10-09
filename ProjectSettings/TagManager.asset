@@ -11,6 +11,7 @@ TagManager:
   - LifeBar
   - LifeText
   - PlayerUIManager
+  - EnemyManager
   layers:
   - Default
   - TransparentFX

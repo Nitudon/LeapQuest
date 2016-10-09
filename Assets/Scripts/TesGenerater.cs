@@ -3,9 +3,8 @@ using UniRx;
 using UniRx.Triggers;
 using System.Collections;
 
-public class TesGenerater : MonoBehaviour ,IBattleMessage{
+public class TesGenerater : MonoBehaviour{
 
-    [SerializeField]
     private GameObject[] Enemys;
 
     [SerializeField]

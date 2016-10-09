@@ -67,7 +67,7 @@ public class StepManager : MonoBehaviour {
 
     private void OnBattle()
     {
-        EnemyGenerator.OnBattle(BattleStep.Value);
+        EnemyManager.Instance.BattleStart();
         UICanvas.OnBattle(BattleStep.Value);
     }
 
@@ -75,7 +75,6 @@ public class StepManager : MonoBehaviour {
 
         if (TimeSchedule[MoveStep].trigger == "Stop")
         {
-            EnemyGenerator.gameObject.SetActive(true);
             BattleStep.Value++;
             audioManager.SoundChange(AudioManager.Music.battle);
         }
