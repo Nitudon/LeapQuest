@@ -12,6 +12,9 @@ TagManager:
   - LifeText
   - PlayerUIManager
   - EnemyManager
+  - UIManager
+  - AudioManager
+  - StepManager
   layers:
   - Default
   - TransparentFX

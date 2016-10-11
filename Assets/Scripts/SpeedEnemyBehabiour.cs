@@ -22,9 +22,9 @@ public class SpeedEnemyBehabiour : EnemyAbstractController{
 
     protected override void EnemyBehave()
     {
-        Vector3[] MoveVectors = new Vector3[] { new Vector3(Camera.transform.position.x+OUT_MOVE_DISTANCE, transform.position.y, transform.position.z - 0.01f), new Vector3(Camera.transform.position.x - OUT_MOVE_DISTANCE, transform.position.y, transform.position.z - 0.02f) };
+        Vector3[] MoveVectors = new Vector3[] { new Vector3(Camera.transform.position.x+OUT_MOVE_DISTANCE, transform.position.y, transform.position.z - 0.13f), new Vector3(Camera.transform.position.x - OUT_MOVE_DISTANCE, transform.position.y, transform.position.z - 0.26f) };
 
-        _transform.DOPath(MoveVectors, 1.8f);
+        _transform.DOPath(MoveVectors, 1.3f);
 
     }
 

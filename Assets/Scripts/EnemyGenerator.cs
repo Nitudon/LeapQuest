@@ -19,15 +19,15 @@ public class EnemyGenerator : MonoBehaviour {
 
     //出現場所
     private readonly Vector3[] GENERATE_POSITIONS_X = new Vector3[]{
-        new Vector3(-0.3f,0f,0.5f),
-        new Vector3(0f,0f,0.5f),
-        new Vector3(0.3f,0f,0.5f)
+        new Vector3(-0.3f,0f,0.7f),
+        new Vector3(0f,0f,0.7f),
+        new Vector3(0.3f,0f,0.7f)
     };
 
     private readonly Vector3[] GENERATE_POSITIONS_Z = new Vector3[]{
-        new Vector3(-0.5f,0f,0.2f),
-        new Vector3(0f,0f,0.2f),
-        new Vector3(0.5f,0f,0.2f)
+        new Vector3(0f,0f,0f),
+        new Vector3(0f,0f,0.5f),
+        new Vector3(0f,0f,1f)
     };
 
     //敵の情報のイニシャライズ
@@ -76,7 +76,7 @@ public class EnemyGenerator : MonoBehaviour {
         foreach (EnemySpawn spawn in spawns)
         {
             //情報の取得
-            Vector3 pos = player.transform.position + GENERATE_POSITIONS_X[(int)spawn.placeX];
+            Vector3 pos = player.transform.position + GENERATE_POSITIONS_X[(int)spawn.placeX] + GENERATE_POSITIONS_Z[(int)spawn.placeZ];
             GameObject enemy = Enemys[(int)spawn.enemy];
             //生成
             Instantiate(enemy,pos,enemy.transform.rotation);

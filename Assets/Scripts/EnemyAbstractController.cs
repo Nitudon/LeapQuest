@@ -43,6 +43,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     protected readonly Vector3 DEATH_SMASH_DISTANCE = new Vector3(0f,0.7f,0.2f);
     private bool IsAttacked;
     private bool IsDeath;
+    
     #region[Protected Parameter]
     protected float BEHAVE_TIME = 2f;
     protected int ATTACK_DAMAGE = 1;
@@ -54,6 +55,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     protected int _enemyLife;
     protected Vector3 pos;
     #endregion
+    
     #endregion
 
     /** 衝突時の処理*/
@@ -74,6 +76,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         if(collider.tag == "Player")
         {
             PlayerUIManager.Instance.LifeAffect(ATTACK_DAMAGE);
+            EnemyDestroy();
         }
     }
 
@@ -88,6 +91,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     {
         yield return new WaitForSeconds(INVICIBLE_TIME);
         IsAttacked = false;
+        _constantForce.enabled = false;
         yield break;
     }
 
@@ -97,6 +101,8 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         if (collision.gameObject.tag == "Hand")
         {
             _enemyLife--;
+            _rigitbody.AddForce(DEATH_SMASH_DISTANCE);
+            _constantForce.enabled = true;
         }
 
         if (_enemyLife == 0)
@@ -127,14 +133,18 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     protected virtual IEnumerator EnemyDeath()
     {
         _collider.enabled = false;
-        _rigitbody.AddForce(DEATH_SMASH_DISTANCE);
-        _constantForce.enabled = true;
         yield return new WaitForSeconds(deathTime);
         GameObject _particle = Instantiate(DeathParticle, _transform.position, DeathParticle.transform.rotation) as GameObject;
-        Destroy(gameObject);
+        EnemyDestroy();
         yield return new WaitForSeconds(3f);
         Destroy(_particle);
         yield break;
+    }
+
+    protected virtual void EnemyDestroy()
+    {
+        EnemyManager.Instance.EnemyDestroy();
+        Destroy(gameObject);
     }
 
 	// Use this for initialization
@@ -143,7 +153,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _enemyLife = EnemyLife;
         Camera = GameObject.Find("Camera");
-        _collider = GetComponent<BoxCollider>();
+        _collider = transform.GetComponentInChildren<MeshCollider>();
         _rigitbody = GetComponent<Rigidbody>();
         _constantForce = GetComponent<ConstantForce>();
         _transform = transform;

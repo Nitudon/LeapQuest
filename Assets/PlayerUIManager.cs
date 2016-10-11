@@ -11,7 +11,7 @@ public class PlayerUIManager : MonoBehaviour {
     /// </summary>
     public Player _player;
     private static PlayerUIManager _instance;
-    private Animator _playerAnimator;
+    private PlayerMover _playerMover;
     private Image _lifeBar;
     private Text _lifeText;
     
@@ -31,6 +31,7 @@ public class PlayerUIManager : MonoBehaviour {
         _player = new Player();
         _lifeBar = GameObject.FindGameObjectWithTag("LifeBar").GetComponent<Image>();
         _lifeText = GameObject.FindGameObjectWithTag("LifeText").GetComponent<Text>();
+        _playerMover = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
     }
       
     //get_instance
@@ -59,12 +60,17 @@ public class PlayerUIManager : MonoBehaviour {
     {
         _lifeBar.fillAmount = life / Instance._player.START_LIFE;
         _lifeText.text = life.ToString() + "/" + Instance._player.START_LIFE.ToString();
+        _playerMover.OnPlayerDamage();//ダメージエフェクト
     }
 
     //ライフポイント影響
     public void LifeAffect(int point)
     {
         Instance._player.LifeAffect(point);
+    }
+    public void OnPlayerWalk()
+    {
+        _playerMover.OnPlayerWalk();
     }
 
 }

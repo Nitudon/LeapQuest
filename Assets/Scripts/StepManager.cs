@@ -7,94 +7,35 @@ using UniRx.Triggers;
 
 public class StepManager : MonoBehaviour {
 
-    private struct TimeStep
-    {
-        public string trigger;
-        public float time;
+    private static StepManager _instance;
 
-        public TimeStep(string _trigger,float _time)
-        {
-            trigger = _trigger;
-            time = _time;
-        }
+    void Awake()
+    {
+        _instance = GameObject.FindGameObjectWithTag("StepManager").GetComponent<StepManager>();
+        _instance.audioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        _instance.UICanvas = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _instance.battleStep = 0;
+
+        PlayerUIManager.Instance.OnPlayerWalk();
     }
 
-    [SerializeField]
-    private TimeSchedule timeschedule;
-
-    [SerializeField]
-    private AudioManager audioManager;
-
-    public IntReactiveProperty BattleStep;
-
-    #region[Client]
-    private PlayerMover Player;
-    private TesGenerater EnemyGenerator;
+    public static StepManager Instance
+    {
+        get{ 
+            return _instance;
+        }
+    }
+    private int battleStep;
+    private AudioManager audioPlayer;
     private UIManager UICanvas;
-    #endregion
 
-    #region[PrivateParameter]
-    private int MoveStep;    
-    private static List<TimeStep> TimeSchedule;
-    private bool IsBattle;
-    #endregion 
 
-    // Use this for initialization
-    void Start () {
-        UICanvas = GameObject.Find("UICanvas").GetComponent<UIManager>();
-        TimeSchedule = new List<TimeStep>();
-        Player = GameObject.Find("Camera").GetComponent<PlayerMover>();
-        IsBattle = false;
-        EnemyGenerator = transform.FindChild("EnemyGenerator").gameObject.GetComponent<TesGenerater>();
-        MoveStep = 0;
-
-        for(int i = 0; i < timeschedule.times.Length; i++)
-        {
-            TimeSchedule.Add(new TimeStep(timeschedule.triggers[i],timeschedule.times[i]));
-        }
-
-        for (int i = 0; i < TimeSchedule.Count; i++)
-        {
-            Observable.Timer(System.TimeSpan.FromSeconds(TimeSchedule[i].time))
-                .Subscribe(_ =>Step())
-                    .AddTo(gameObject);
-        }
-
-        BattleStep
-            .Where(_ => BattleStep.Value > 0)
-            .Subscribe(_ => OnBattle());
-    }
-
-    private void OnBattle()
+    public void OnBattle()
     {
-        EnemyManager.Instance.BattleStart();
-        UICanvas.OnBattle(BattleStep.Value);
+        EnemyManager.Instance.BattleStart(battleStep);
+        UICanvas.OnBattle(++battleStep);
     }
 
-    private void Step() { 
-
-        if (TimeSchedule[MoveStep].trigger == "Stop")
-        {
-            BattleStep.Value++;
-            audioManager.SoundChange(AudioManager.Music.battle);
-        }
-
-        else
-        {
-            EnemyGenerator.gameObject.SetActive(false);
-            GameObject[] Enemys = GameObject.FindGameObjectsWithTag("Enemy");
-            if (Enemys.Length > 0)
-            {
-                foreach (GameObject enemy in Enemys)
-                {
-                    var controller = enemy.GetComponent<EnemyAbstractController>();
-                    controller.EndTurn();
-                }
-            }
-
-            audioManager.SoundChange(AudioManager.Music.walk);
-        }
-        Player.OnPlayerMove(TimeSchedule[MoveStep++].trigger);
-    }
+    
 
 }

@@ -13,15 +13,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   times:
   - 0
-  - 10
-  - 30
-  - 40
+  - 5
+  - 65
   - 70
-  - 80
-  - 110
-  - 120
-  - 150
-  - 160
+  - 130
+  - 135
+  - 195
+  - 200
+  - 260
+  - 265
   triggers:
   - Front
   - Stop

@@ -7,7 +7,7 @@ public class EnemySphere : EnemyAbstractController{
 
     protected override void Start()
     {
-        BEHAVE_TIME = 3f;
+        BEHAVE_TIME = 1.5f;
         base.Start();        
     }
 
