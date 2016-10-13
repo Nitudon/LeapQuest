@@ -26,10 +26,27 @@ public class PlayerMover : MonoBehaviour{
     //プレイヤーを歩行させる
     public void OnPlayerWalk()
     {
-        transform.DOJump(new Vector3(0f,0f,WALK_DISTANCE),JUMP_POWER,JUMP_NUMBER,WALK_DURATION)
+        if (StepManager.Instance.battleStep == 4)
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.Append(transform.DOJump(new Vector3(0f, 0f, WALK_DISTANCE)/2, JUMP_POWER, JUMP_NUMBER/2, WALK_DURATION/2)
             .SetRelative()
-            .SetEase(Ease.Linear)
+            .SetEase(Ease.Linear));
+
+            seq.Append(transform.DORotate(new Vector3(0f, -90f, 0f), 2f));
+
+            seq.Append(transform.DOJump(new Vector3(-WALK_DISTANCE, 0f, 0f)/2, JUMP_POWER, JUMP_NUMBER/2, WALK_DURATION/2)
+            .SetRelative()
+            .SetEase(Ease.Linear))
             .OnComplete(() => StepManager.Instance.OnBattle());
+        }
+        else
+        {
+            transform.DOJump(new Vector3(0f, 0f, WALK_DISTANCE), JUMP_POWER, JUMP_NUMBER, WALK_DURATION)
+                .SetRelative()
+                .SetEase(Ease.Linear)
+                .OnComplete(() => StepManager.Instance.OnBattle());
+        }
     }
 
     //プレイヤーがダメージを受けた時の挙動

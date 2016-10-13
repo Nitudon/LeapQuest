@@ -53,7 +53,7 @@ public class EnemyManager : MonoBehaviour {
             .Skip(1)
             .Where(x => x == 0)
             .Delay(System.TimeSpan.FromSeconds(2f))
-            .Subscribe(_ => PlayerUIManager.Instance.OnPlayerWalk());
+            .Subscribe(_ => StepManager.Instance.OnWalk());
     }
 
     public void EnemyDestroy()
