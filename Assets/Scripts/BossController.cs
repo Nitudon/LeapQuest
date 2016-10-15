@@ -15,7 +15,12 @@ public class BossController :EnemyAbstractController{
 
     private bool isBreak;
 
-    private IntReactiveProperty i; 
+    #region[DamageParameter]
+    private const float DAMAGE_DURATION = 1f;//ダメージを受けているときの時間
+    private const float DAMAGE_POWER = 0.015f;//ダメージの振動の強さ
+    private const int DAMAGE_SHAKE = 22;//ダメージの振動数
+    private const int DAMAGE_SHAKE_ANGLERANGE = 20;//ダメージの振動の角度の散らばり
+    #endregion
 
     private void OnRockHit()
     {
@@ -32,9 +37,12 @@ public class BossController :EnemyAbstractController{
         if (!isBreak && collision.collider.tag == "Rock")
         {
             breakPoint--;
-            if(breakPoint == 0)
+            transform.DOKill();
+            transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
+            if (breakPoint == 0)
             {
                 isBreak = true;
+                _animator.SetTrigger("front");
                 OnRockHit();
             }
         }
@@ -55,6 +63,8 @@ public class BossController :EnemyAbstractController{
 
     protected override void EnemyBehave()
     {
+        if(breakPoint <= 0)
+        _animator.SetTrigger("Rock");
         GameObject attackRock = Instantiate(AttackRock,_transform.position,_transform.rotation) as GameObject;
     }
 

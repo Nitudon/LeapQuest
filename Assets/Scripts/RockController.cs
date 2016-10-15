@@ -25,7 +25,7 @@ public class RockController : MonoBehaviour {
         cameraPos = GameObject.FindGameObjectWithTag("Player").transform.position;
 
         Vector3 rockPos = enemyPos;
-        Vector3 goal = new Vector3(Random.Range(cameraPos.x - 0.1f, cameraPos.x + 0.1f), Random.Range(cameraPos.y, cameraPos.y + 0.05f), cameraPos.z);
+        Vector3 goal = new Vector3(cameraPos.x, Random.Range(cameraPos.y, cameraPos.y + 0.05f), Random.Range(cameraPos.z - 0.1f, cameraPos.z + 0.1f));
         Vector3 intercept = rockPos + (goal - rockPos) * 0.5f + new Vector3(0f, 0.18f, 0f);
 
         if(dir == pathDirection.player)
@@ -50,7 +50,7 @@ public class RockController : MonoBehaviour {
             PlayerUIManager.Instance.LifeAffect(1);
         }
 
-        else if(collider.tag == "Hand")
+        else if(collider.tag == "Hand" && !isReflect)
         {
             isReflect = true;
             gameObject.transform.DOKill();
@@ -58,11 +58,6 @@ public class RockController : MonoBehaviour {
            .OnComplete(() => Destroy(gameObject.transform.gameObject));
         }
 
-        else if(collider.tag == "Boss" && isReflect)
-        {
-            gameObject.transform.DOKill();
-            Destroy(gameObject);
-        }
     }
 
 }

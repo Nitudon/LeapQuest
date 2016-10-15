@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Battle5
   m_EditorClassIdentifier: 
   EnemyTerms:
-  - Time: 0
+  - Time: 2
     EnemyEntrys:
     - Enemy: 3
       PlaceX: 1

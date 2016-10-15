@@ -32,5 +32,3 @@ MonoBehaviour:
     - Enemy: 0
       PlaceX: 0
       PlaceZ: 2
-  - Time: 0
-    EnemyEntrys: []

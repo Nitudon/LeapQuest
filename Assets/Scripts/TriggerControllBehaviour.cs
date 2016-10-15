@@ -7,10 +7,11 @@ public class TriggerControllBehaviour : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        animator.ResetTrigger("Rock");
+        animator.ResetTrigger("Punch");
+        animator.ResetTrigger("Damage");
         animator.ResetTrigger("Front");
-        animator.ResetTrigger("Stop");
-        animator.ResetTrigger("Left");
-        animator.ResetTrigger("Right");
+        animator.ResetTrigger("Back");
     }
 
 	//OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

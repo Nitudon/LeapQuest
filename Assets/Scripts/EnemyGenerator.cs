@@ -30,6 +30,8 @@ public class EnemyGenerator : MonoBehaviour {
         new Vector3(0f,0f,1f)
     };
 
+    private readonly Vector3 BOSS_POSITION = new Vector3(-1.04f,-3.6527f,0.91f);
+
     //敵の情報のイニシャライズ
     public void Init()
     {
@@ -79,7 +81,14 @@ public class EnemyGenerator : MonoBehaviour {
             Vector3 pos = player.transform.position + GENERATE_POSITIONS_X[(int)spawn.placeX] + GENERATE_POSITIONS_Z[(int)spawn.placeZ];
             GameObject enemy = Enemys[(int)spawn.enemy];
             //生成
-            Instantiate(enemy,pos,enemy.transform.rotation);
+            if (spawn.enemy == EnemySpawn.EnemyKinds.boss)
+            {
+                Instantiate(enemy, BOSS_POSITION, enemy.transform.rotation);
+            }
+            else
+            {
+                Instantiate(enemy, pos, enemy.transform.rotation);
+            }
         }
     }
 
