@@ -124,11 +124,6 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public void EndTurn()
-    {
-        EnemyEnd();
-    }
-
     /** 消滅時の処理*/
     protected virtual IEnumerator EnemyDeath()
     {
@@ -147,6 +142,17 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    //ルーチンワークを行うDisposable
+    protected virtual System.IDisposable EnemyRoutineDisposable()
+    {
+        var disposable = Observable.Interval(System.TimeSpan.FromSeconds(BEHAVE_TIME))
+           .Where(_ => !_isAttacked)
+           .Subscribe(_ => EnemyBehave())
+           .AddTo(gameObject);
+
+        return disposable;
+    }
+
 	// Use this for initialization
 	protected virtual void Start () {
         IsAttacked = IsDeath = false;
@@ -158,11 +164,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         _constantForce = GetComponent<ConstantForce>();
         _transform = transform;
         pos = Camera.transform.position - transform.position;
-
-        Observable.Interval(System.TimeSpan.FromSeconds(BEHAVE_TIME))
-            .Where(_ => !_isAttacked)
-            .Subscribe(_ => EnemyBehave())
-            .AddTo(gameObject);
+        EnemyRoutineDisposable();
 
     }
 

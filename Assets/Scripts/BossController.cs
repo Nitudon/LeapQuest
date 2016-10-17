@@ -7,6 +7,7 @@ using System;
 public class BossController :EnemyAbstractController{
 
     private const int HIT_BREAK_POINT = 3;
+    private const int PUNCH_TIME = 7;
 
     [SerializeField]
     private GameObject AttackRock;
@@ -22,9 +23,9 @@ public class BossController :EnemyAbstractController{
     private const int DAMAGE_SHAKE_ANGLERANGE = 20;//ダメージの振動の角度の散らばり
     #endregion
 
-    private void OnRockHit()
+    protected override void OnCollisionEnter(Collision collision)
     {
-
+        
     }
 
     protected override void OnAttacked(Collision collision)
@@ -32,24 +33,21 @@ public class BossController :EnemyAbstractController{
         base.OnAttacked(collision);
     }
 
-    protected override void OnCollisionEnter(Collision collision)
+    protected override void OnTriggerEnter(Collider collider)
     {
-        if (!isBreak && collision.collider.tag == "Rock")
+        if (!isBreak && collider.tag == "Rock")
         {
-            breakPoint--;
-            transform.DOKill();
-            transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
-            if (breakPoint == 0)
+            if (collider.GetComponent<RockController>().isReflect)
             {
-                isBreak = true;
-                _animator.SetTrigger("front");
-                OnRockHit();
+                Destroy(collider.gameObject);
+                breakPoint--;
+                transform.DOKill();
+                transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
+                if (breakPoint == 0)
+                {
+                    isBreak = true;
+                }
             }
-        }
-
-        else if (isBreak && collision.collider.tag == "Hand")
-        {
-
         }
     }
 
@@ -63,9 +61,39 @@ public class BossController :EnemyAbstractController{
 
     protected override void EnemyBehave()
     {
-        if(breakPoint <= 0)
-        _animator.SetTrigger("Rock");
-        GameObject attackRock = Instantiate(AttackRock,_transform.position,_transform.rotation) as GameObject;
+        if (!isBreak)
+        {
+            _animator.SetTrigger("Rock");
+            GameObject attackRock = Instantiate(AttackRock, _transform.position + new Vector3(0f, 0.1f, 0f), _transform.rotation) as GameObject;
+        }
+        else
+        {
+            _animator.SetTrigger("Punch");
+           
+        }
+    }
+
+    private IObservable<long> BreakObservable()
+    {
+        var observable = Observable.EveryUpdate()
+            .Where(_ => isBreak);
+
+        return observable;
+    }
+
+    protected override IDisposable EnemyRoutineDisposable()
+    {
+        var disposable = Observable.Interval(System.TimeSpan.FromSeconds(BEHAVE_TIME))
+           .Where(_ => !_isAttacked)
+           .TakeUntil(BreakObservable())
+           .Subscribe(_ => EnemyBehave(),
+                      () => Observable.Interval(System.TimeSpan.FromSeconds(PUNCH_TIME))
+                                       .Where(_ => !_isAttacked)
+                                       .Subscribe(_ => EnemyBehave())
+                                       .AddTo(gameObject)
+           );
+
+        return disposable;
     }
 
     protected override void EnemyAttack()

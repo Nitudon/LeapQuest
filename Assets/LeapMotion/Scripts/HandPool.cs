@@ -15,10 +15,8 @@ namespace Leap.Unity {
    * When a HandProxy is created, an IHandModel is removed from the pool.
    * When a HandProxy is finished, its IHandModel is returned to the pool.
    */
-  public class HandPool :
-    HandFactory {
-    [SerializeField]
-    private List<ModelGroup> ModelPool;
+  public class HandPool : HandFactory {
+    public List<ModelGroup> ModelPool;
     private List<HandProxy> activeHandReps = new List<HandProxy>();
     private Dictionary<IHandModel, ModelGroup> modelGroupMapping = new Dictionary<IHandModel, ModelGroup>();
     private Dictionary<IHandModel, HandProxy> modelToHandRepMapping = new Dictionary<IHandModel, HandProxy>();

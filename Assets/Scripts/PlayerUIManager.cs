@@ -50,13 +50,22 @@ public class PlayerUIManager : MonoBehaviour {
                     .Skip(1)//初期化の検知をスキップ
                     .TakeWhile(x => x >= 0)//正の値までを検知
                     .Subscribe(x => _instance.UIChangeWithLife(x));//UI更新
+
+                _instance._player._life
+                    .Where(x => x == 0)
+                    .Subscribe(_ => _instance.GameOver());
             }
             return _instance;
         }
     }
 
+    private void GameOver()
+    {
+        StepManager.Instance.GameOverStep();
+    }
+
     //描画
-    public void UIChangeWithLife(float life)
+    private void UIChangeWithLife(float life)
     {
         _lifeBar.fillAmount = life / Instance._player.START_LIFE;
         _lifeText.text = life.ToString() + "/" + Instance._player.START_LIFE.ToString();
@@ -68,6 +77,7 @@ public class PlayerUIManager : MonoBehaviour {
     {
         Instance._player.LifeAffect(point);
     }
+
     public void OnPlayerWalk()
     {
         _playerMover.OnPlayerWalk();

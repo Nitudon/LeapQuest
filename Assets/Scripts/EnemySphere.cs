@@ -42,7 +42,7 @@ public class EnemySphere : EnemyAbstractController{
     {
         Vector3 enemyPosition = _transform.position;
 
-        transform.DOMove(Camera.transform.position, 1f);
+        transform.DOMove(new Vector3(Random.Range(Camera.transform.position.x-0.2f, Camera.transform.position.x + 0.2f),Random.Range(Camera.transform.position.y , Camera.transform.position.y + 0.3f), Camera.transform.position.z), 1f);
         transform.DORotate(new Vector3(60, 180, 0), 1f)
             .OnComplete(() => Destroy(gameObject));
     }

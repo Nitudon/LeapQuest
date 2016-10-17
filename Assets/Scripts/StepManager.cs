@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 /// <summary>
 /// StepManager
@@ -19,10 +21,12 @@ public class StepManager : MonoBehaviour {
         _instance = GameObject.FindGameObjectWithTag("StepManager").GetComponent<StepManager>();
         _instance.audioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         _instance.UICanvas = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _instance.FadeCanvas = GameObject.FindGameObjectWithTag("Fade").GetComponent<CanvasGroup>();
         _instance.battleStep = 0;
         
         //スタート
-        PlayerUIManager.Instance.OnPlayerWalk();
+        FadeCanvas.DOFade(0,3f)
+        .OnComplete(() =>PlayerUIManager.Instance.OnPlayerWalk());
     }
 
     //get_instance
@@ -36,12 +40,18 @@ public class StepManager : MonoBehaviour {
     public int battleStep { get; private set; }//現在のバトルステップ
     private AudioManager audioPlayer;//BGM管理
     private UIManager UICanvas;//バトルヘッダー
-
+    private CanvasGroup FadeCanvas;
     //バトル終了、及び最初の移動
     public void OnWalk()
     {
         PlayerUIManager.Instance.OnPlayerWalk();
         audioPlayer.SoundChange(AudioManager.Music.walk);
+    }
+
+    public void GameOverStep()
+    {
+        FadeCanvas.DOFade(1, 3f)
+        .OnComplete(() => SceneManager.LoadScene("GameOver"));
     }
 
     //ステップ更新とバトル通知

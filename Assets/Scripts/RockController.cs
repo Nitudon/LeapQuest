@@ -7,7 +7,8 @@ public class RockController : MonoBehaviour {
     private Vector3 enemyPos;
     private Vector3 cameraPos;
 
-    public bool isReflect;
+    [HideInInspector]
+    public bool isReflect { get; private set; }
 
     enum pathDirection {player,enemy}
 
@@ -25,7 +26,7 @@ public class RockController : MonoBehaviour {
         cameraPos = GameObject.FindGameObjectWithTag("Player").transform.position;
 
         Vector3 rockPos = enemyPos;
-        Vector3 goal = new Vector3(cameraPos.x, Random.Range(cameraPos.y, cameraPos.y + 0.05f), Random.Range(cameraPos.z - 0.1f, cameraPos.z + 0.1f));
+        Vector3 goal = new Vector3(cameraPos.x, Random.Range(cameraPos.y-0.1f, cameraPos.y-0.05f), Random.Range(cameraPos.z - 0.1f, cameraPos.z + 0.1f));
         Vector3 intercept = rockPos + (goal - rockPos) * 0.5f + new Vector3(0f, 0.18f, 0f);
 
         if(dir == pathDirection.player)
@@ -54,8 +55,7 @@ public class RockController : MonoBehaviour {
         {
             isReflect = true;
             gameObject.transform.DOKill();
-            gameObject.transform.DOPath(RockPath(pathDirection.enemy), 3f, PathType.CatmullRom)
-           .OnComplete(() => Destroy(gameObject.transform.gameObject));
+            gameObject.transform.DOPath(RockPath(pathDirection.enemy), 3f, PathType.CatmullRom);
         }
 
     }
