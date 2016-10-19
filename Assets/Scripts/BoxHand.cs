@@ -9,9 +9,6 @@ using System.Collections;
 namespace Leap.Unity {
     public class BoxHand : SkeletalHand {
 
-        [SerializeField]
-        private Transform ShieldObject;
-
         public float filtering = 0.5f;
 
         /* 手と付属オブジェクト**/
@@ -34,13 +31,11 @@ namespace Leap.Unity {
         /* 手の場外処理、盾オブジェクトの非アクティブ化**/
         public override void FinishHand()
         {
-            ShieldObject.gameObject.SetActive(false);
             base.FinishHand();
         }
 
         protected void Start()
         {
-            shieldBody = ShieldObject.GetComponent<Rigidbody>();
             palmBody = palm.GetComponent<Rigidbody>();
         }
 
@@ -70,11 +65,6 @@ namespace Leap.Unity {
                     {
                         shieldBody.MovePosition(GetPalmCenter() + shieldOffsetPosition);
                        // ShieldObject.gameObject.SetActive(true);
-                    }
-                    /* 握っていないときは非アクティブに**/
-                    else
-                    {
-                        ShieldObject.gameObject.SetActive(false);
                     }
                 }
                 /* 手オブジェクト処理、セットされている場合追従させる**/

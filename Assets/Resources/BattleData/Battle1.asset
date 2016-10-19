@@ -14,7 +14,7 @@ MonoBehaviour:
   EnemyTerms:
   - Time: 2
     EnemyEntrys:
-    - Enemy: 0
+    - Enemy: 3
       PlaceX: 0
       PlaceZ: 0
     - Enemy: 0

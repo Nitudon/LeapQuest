@@ -39,6 +39,7 @@ public class EnemyGenerator : MonoBehaviour {
         Enemys.Add(Resources.Load("Enemys/Slime") as GameObject);
         Enemys.Add(Resources.Load("Enemys/MetalSlime") as GameObject);
         Enemys.Add(Resources.Load("Enemys/Shielder") as GameObject);
+        Enemys.Add(Resources.Load("Enemys/Flydevil") as GameObject);
         Enemys.Add(Resources.Load("Enemys/Boss") as GameObject);
     }
 

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: cb35a6b1c52a3ad48ba6a4b1e5424134
-timeCreated: 1476641736
+guid: bb778351e648bc747a66c887f9087ca6
+timeCreated: 1476812784
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -59,13 +59,22 @@ ModelImporter:
     400050: Lamp
     4300000: golem
     7400000: Armature|Damaged
-    7400002: Armature|Idle
-    7400004: Armature|Idle.001
-    7400006: Armature|Punch
-    7400008: Armature|PunchBack
-    7400010: Armature|PunchDamage
-    7400012: Armature|PunchDamageBack
-    7400014: Armature|RockAttack
+    7400002: Armature|FaintPunch
+    7400004: Armature|FaintPunch.Back
+    7400006: Armature|FaintPunchBack
+    7400008: Armature|GPunch
+    7400010: Armature|Idle
+    7400012: Armature|Idle.001
+    7400014: Armature|Punch
+    7400016: Armature|PunchBack
+    7400018: Armature|PunchBack.001
+    7400020: Armature|PunchDamage
+    7400022: Armature|PunchDamageBack
+    7400024: Armature|PUnchDash
+    7400026: Armature|PUnchDash.001
+    7400028: Armature|RockAttack
+    7400030: Armature|ShockPunch
+    7400032: Armature|Throw
     9500000: //RootNode
     13700000: golem
   materials:

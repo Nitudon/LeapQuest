@@ -13,7 +13,8 @@ public class BossController :EnemyAbstractController{
     private GameObject AttackRock;
 
     private int breakPoint;
-
+    private int punchPoint;
+    private Vector3 bossPosition;
     private bool isBreak;
 
     #region[DamageParameter]
@@ -25,7 +26,19 @@ public class BossController :EnemyAbstractController{
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.gameObject.tag == "Hand" && (_animator.GetCurrentAnimatorStateInfo(0).IsName("Punch") || _animator.GetCurrentAnimatorStateInfo(0).IsName("FaintPunch")))
+        {
+            punchPoint--;
+            transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
+            if (punchPoint == 0)
+            {
+                _animator.SetTrigger("Damage");
+                _enemyLife--;
+                transform.DOMove(bossPosition, 0.5f);
+                Debug.Log(_enemyLife);
+                punchPoint = HIT_BREAK_POINT;
+            }
+        }
     }
 
     protected override void OnAttacked(Collision collision)
@@ -45,17 +58,26 @@ public class BossController :EnemyAbstractController{
                 transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
                 if (breakPoint == 0)
                 {
+                    punchPoint = HIT_BREAK_POINT;
                     isBreak = true;
                 }
             }
         }
+
+        if(isBreak && collider.tag == "Player")
+        {
+            PlayerUIManager.Instance.LifeAffect(ATTACK_DAMAGE);
+        }
+
     }
 
     protected override void Start()
     {
+        bossPosition = transform.position;
+        ATTACK_DAMAGE = 3;
         breakPoint = HIT_BREAK_POINT;
         isBreak = false;
-        BEHAVE_TIME = 3f;
+        BEHAVE_TIME = 5f;
         base.Start();
     }
 
@@ -64,12 +86,11 @@ public class BossController :EnemyAbstractController{
         if (!isBreak)
         {
             _animator.SetTrigger("Rock");
-            GameObject attackRock = Instantiate(AttackRock, _transform.position + new Vector3(0f, 0.1f, 0f), _transform.rotation) as GameObject;
+            GameObject attackRock = Instantiate(AttackRock, _transform.position + new Vector3(-0.2f, 0.1f, 0f), _transform.rotation) as GameObject;
         }
         else
         {
-            _animator.SetTrigger("Punch");
-           
+            EnemyAttack();
         }
     }
 
@@ -98,7 +119,7 @@ public class BossController :EnemyAbstractController{
 
     protected override void EnemyAttack()
     {
-        throw new NotImplementedException();
+        _animator.SetTrigger("Punch");
     }
 
 

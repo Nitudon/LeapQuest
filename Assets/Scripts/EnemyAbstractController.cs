@@ -165,7 +165,6 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         _transform = transform;
         pos = Camera.transform.position - transform.position;
         EnemyRoutineDisposable();
-
     }
 
 }

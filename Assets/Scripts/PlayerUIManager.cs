@@ -52,7 +52,7 @@ public class PlayerUIManager : MonoBehaviour {
                     .Subscribe(x => _instance.UIChangeWithLife(x));//UI更新
 
                 _instance._player._life
-                    .Where(x => x == 0)
+                    .Where(x => x <= 0)
                     .Subscribe(_ => _instance.GameOver());
             }
             return _instance;
@@ -75,7 +75,14 @@ public class PlayerUIManager : MonoBehaviour {
     //ライフポイント影響
     public void LifeAffect(int point)
     {
-        Instance._player.LifeAffect(point);
+        if (Instance._player._life.Value - point >= 0)
+        {
+            Instance._player.LifeAffect(point);
+        }
+        else
+        {
+            Instance._player._life.Value = 0;
+        }
     }
 
     public void OnPlayerWalk()

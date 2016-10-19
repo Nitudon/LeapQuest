@@ -5,9 +5,15 @@ using System;
 
 public class FlyingEnemyController : EnemyAbstractController {
 
+    protected override void Start()
+    {
+        BEHAVE_TIME = 1f;
+        base.Start();
+    }
+
     protected override void EnemyBehave()
     {
-        throw new NotImplementedException();
+        transform.DOMoveZ(transform.position.z - 0.05f, 1f);
     }
 
     protected override void EnemyAttack()
