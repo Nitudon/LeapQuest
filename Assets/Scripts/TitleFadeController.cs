@@ -38,7 +38,7 @@ namespace Leap.Unity
                 DoubleGutsObservable()
                 .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(1)))
                 .TakeUntil(DoubleGutsCancelObservable())
-                .RepeatUntilDestroy(gameObject);
+                .RepeatUntilDestroy(this);
         }
 
         void Start()

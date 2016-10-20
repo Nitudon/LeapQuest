@@ -21,4 +21,10 @@ public class FlyingEnemyController : EnemyAbstractController {
         throw new NotImplementedException();
     }
 
+    protected override IEnumerator EnemyDeath()
+    {
+        GetComponent<Rigidbody>().useGravity = true;
+        return base.EnemyDeath();
+    }
+
 }

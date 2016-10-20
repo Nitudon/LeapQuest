@@ -41,7 +41,7 @@ namespace Leap.Unity
                 GutsObservable(hand)
                 .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(1)))
                 .TakeUntil(GutsCancelObservable(hand))
-                .RepeatUntilDestroy(gameObject);
+                .RepeatUntilDestroy(this);
         }
 
         void Start()
