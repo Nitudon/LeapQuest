@@ -13,7 +13,12 @@ public class FlyingEnemyController : EnemyAbstractController {
 
     protected override void EnemyBehave()
     {
-        transform.DOMoveZ(transform.position.z - 0.05f, 1f);
+        Vector3 goal = transform.position - new Vector3(0f,0f,0.2f);
+        Vector3 intercept = transform.position += new Vector3(0f,0.05f,-0.1f);
+
+        Vector3[] path = new Vector3[] { intercept,goal};
+
+        transform.DOPath(path, 1f);
     }
 
     protected override void EnemyAttack()
@@ -23,8 +28,6 @@ public class FlyingEnemyController : EnemyAbstractController {
 
     protected override IEnumerator EnemyDeath()
     {
-        GetComponent<Rigidbody>().useGravity = true;
         return base.EnemyDeath();
     }
-
 }

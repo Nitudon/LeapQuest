@@ -43,7 +43,14 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     protected readonly Vector3 DEATH_SMASH_DISTANCE = new Vector3(0f,0.7f,0.2f);
     private bool IsAttacked;
     private bool IsDeath;
-    
+
+    #region[DamageParameter]
+    private const float DAMAGE_DURATION = 1f;//ダメージを受けているときの時間
+    private const float DAMAGE_POWER = 0.015f;//ダメージの振動の強さ
+    private const int DAMAGE_SHAKE = 22;//ダメージの振動数
+    private const int DAMAGE_SHAKE_ANGLERANGE = 20;//ダメージの振動の角度の散らばり
+    #endregion
+
     #region[Protected Parameter]
     protected float BEHAVE_TIME = 2f;
     protected int ATTACK_DAMAGE = 1;
@@ -80,6 +87,11 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         }
     }
 
+    protected void OnAttackedShake()
+    {
+        transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
+    }
+
     /** 消滅時の処理起動*/
     protected virtual void StartDeathCoroutine()
     {
@@ -98,18 +110,22 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     /** 攻撃されたときの処理*/
     protected virtual void OnAttacked(Collision collision)
     {
+
         if (collision.gameObject.tag == "Hand")
         {
             _enemyLife--;
             _rigitbody.AddForce(DEATH_SMASH_DISTANCE);
-            _constantForce.enabled = true;
+            if (_enemyLife == 0)
+            {
+                _rigitbody.velocity = Vector3.zero;
+                StartCoroutine(EnemyDeath());
+            }
+            else
+            {
+                OnAttackedShake();
+            }
         }
 
-        if (_enemyLife == 0)
-        {
-            _rigitbody.velocity = Vector3.zero;
-            StartCoroutine(EnemyDeath());
-        }
     }
 
     /** 敵の行動ルーチン*/
@@ -127,6 +143,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     /** 消滅時の処理*/
     protected virtual IEnumerator EnemyDeath()
     {
+        _constantForce.enabled = true;
         _collider.enabled = false;
         yield return new WaitForSeconds(deathTime);
         GameObject _particle = Instantiate(DeathParticle, _transform.position, DeathParticle.transform.rotation) as GameObject;

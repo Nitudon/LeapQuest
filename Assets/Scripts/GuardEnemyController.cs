@@ -13,9 +13,12 @@ public class GuardEnemyController : EnemyAbstractController{
 
     protected override void Start()
     {
-        BEHAVE_TIME = 6f;
+        BEHAVE_TIME = 2f;
         GuardEffect = GetComponent<ParticleSystem>();
         base.Start();
+
+        Observable.Timer(TimeSpan.FromSeconds(6))
+            .Subscribe(_ => EnemyAttack());
     }
 
 
@@ -47,13 +50,16 @@ public class GuardEnemyController : EnemyAbstractController{
 
     protected override void EnemyBehave()
     {
-        isAttack = true;
-        _animator.Play("Attack");
-       EnemyAttack();
+        if (!isAttack)
+        {
+            transform.DOMoveZ(transform.position.z - 0.05f, 1f);
+        }
     }
 
     protected override void EnemyAttack()
     {
+        transform.DOKill();
+        isAttack = true;
         _transform.DOMoveZ(Camera.transform.position.z, 1f)
             .OnComplete(() => Destroy(gameObject));
     }

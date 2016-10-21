@@ -17,19 +17,12 @@ public class BossController :EnemyAbstractController{
     private Vector3 bossPosition;
     private bool isBreak;
 
-    #region[DamageParameter]
-    private const float DAMAGE_DURATION = 1f;//ダメージを受けているときの時間
-    private const float DAMAGE_POWER = 0.015f;//ダメージの振動の強さ
-    private const int DAMAGE_SHAKE = 22;//ダメージの振動数
-    private const int DAMAGE_SHAKE_ANGLERANGE = 20;//ダメージの振動の角度の散らばり
-    #endregion
-
     protected override void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Hand" && (_animator.GetCurrentAnimatorStateInfo(0).IsName("Punch") || _animator.GetCurrentAnimatorStateInfo(0).IsName("FaintPunch")))
         {
             punchPoint--;
-            transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
+            OnAttackedShake();
             if (punchPoint == 0)
             {
                 _animator.SetTrigger("Damage");
@@ -55,7 +48,7 @@ public class BossController :EnemyAbstractController{
                 Destroy(collider.gameObject);
                 breakPoint--;
                 transform.DOKill();
-                transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
+                OnAttackedShake();
                 if (breakPoint == 0)
                 {
                     punchPoint = HIT_BREAK_POINT;

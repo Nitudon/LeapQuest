@@ -13,10 +13,10 @@ public class TitleCameraMover : MonoBehaviour {
             .SetLoops(100);
 
         var seq = DOTween.Sequence();
-        seq.Append(transform.DOMoveZ(100f, 15f)).SetEase(Ease.Linear);
-        seq.Append(transform.DOMoveX(-150f, 15f)).SetEase(Ease.Linear);
-        seq.Append(transform.DOMoveZ(-100f, 15f)).SetEase(Ease.Linear);
-        seq.Append(transform.DOMoveX(150f, 15f)).SetEase(Ease.Linear);
+        seq.Append(transform.DOMoveZ(100f, 18f)).SetEase(Ease.Linear);
+        seq.Append(transform.DOMoveX(-150f, 18f)).SetEase(Ease.Linear);
+        seq.Append(transform.DOMoveZ(-100f, 18f)).SetEase(Ease.Linear);
+        seq.Append(transform.DOMoveX(150f, 18f)).SetEase(Ease.Linear);
         seq.SetLoops(100);
 
     }

@@ -67,12 +67,14 @@ namespace Leap.Unity
 
         private bool isGuts(IHandModel hand)
         {
-            if (hand != null)
+            if (hand.GetLeapHand() != null)
+            {
                 return hand.GetLeapHand().Fingers
                     .Where(finger => ((finger.Type != Finger.FingerType.TYPE_THUMB) && !finger.IsExtended) || ((finger.Type == Finger.FingerType.TYPE_THUMB) && finger.IsExtended))
                     .Count() == 5;
-
+            }
             else return false;
+
         }
 
         private void GameEnd()

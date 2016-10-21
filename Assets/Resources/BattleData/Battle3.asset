@@ -14,6 +14,43 @@ MonoBehaviour:
   EnemyTerms:
   - Time: 3
     EnemyEntrys:
+    - Enemy: 3
+      PlaceX: 0
+      PlaceZ: 2
+    - Enemy: 3
+      PlaceX: 2
+      PlaceZ: 2
     - Enemy: 0
       PlaceX: 1
+      PlaceZ: 1
+  - Time: 10
+    EnemyEntrys:
+    - Enemy: 1
+      PlaceX: 1
+      PlaceZ: 2
+    - Enemy: 3
+      PlaceX: 0
+      PlaceZ: 1
+    - Enemy: 3
+      PlaceX: 2
+      PlaceZ: 1
+    - Enemy: 1
+      PlaceX: 1
+      PlaceZ: 0
+  - Time: 15
+    EnemyEntrys:
+    - Enemy: 0
+      PlaceX: 2
+      PlaceZ: 1
+    - Enemy: 0
+      PlaceX: 0
+      PlaceZ: 1
+    - Enemy: 3
+      PlaceX: 1
+      PlaceZ: 0
+    - Enemy: 3
+      PlaceX: 0
+      PlaceZ: 1
+    - Enemy: 3
+      PlaceX: 2
       PlaceZ: 2

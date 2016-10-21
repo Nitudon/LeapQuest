@@ -12,12 +12,19 @@ public class AudioManager : MonoBehaviour {
 
     public enum Music {walk,battle,boss}
 
+    public enum SE { Damaged,EnemyDeath,Reflect}
+
     private AudioSource _audioSource;
 	// Use this for initialization
 	void Start () {
         _audioSource = GetComponent<AudioSource>();
 	}
 	
+    public void SoundEffect(SE effect)
+    {
+        _audioSource.PlayOneShot(SoundEffects[(int)effect]);
+    }
+
     public void SoundChange(Music scene)
     {
         _audioSource.clip = BackSounds[(int)scene];
