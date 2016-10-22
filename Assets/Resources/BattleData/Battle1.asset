@@ -64,7 +64,7 @@ MonoBehaviour:
       PlaceZ: 2
     - Enemy: 0
       PlaceX: 2
-      PlaceZ: 2
+      PlaceZ: 1
     - Enemy: 0
       PlaceX: 0
-      PlaceZ: 2
+      PlaceZ: 1

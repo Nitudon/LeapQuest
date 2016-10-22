@@ -33,7 +33,7 @@ MonoBehaviour:
       PlaceZ: 1
     - Enemy: 3
       PlaceX: 2
-      PlaceZ: 1
+      PlaceZ: 0
     - Enemy: 1
       PlaceX: 1
       PlaceZ: 0

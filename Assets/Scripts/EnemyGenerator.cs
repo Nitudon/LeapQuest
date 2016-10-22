@@ -30,7 +30,7 @@ public class EnemyGenerator : MonoBehaviour {
         new Vector3(0f,0f,1f)
     };
 
-    private readonly Vector3 BOSS_POSITION = new Vector3(-1.04f,-3.6527f,0.91f);
+    private readonly Vector3 BOSS_POSITION = new Vector3(-1.04f,-3.6027f,0.91f);
 
     //敵の情報のイニシャライズ
     public void Init()

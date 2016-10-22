@@ -14,8 +14,8 @@ public class EnemySphere : EnemyAbstractController{
     protected override void EnemyBehave()
     {
         Vector3 interval = pos / 5;
-        Vector3 intercept = new Vector3(_transform.position.x + interval.x/2,_transform.position.y + 0.05f,_transform.position.z + interval.z/2);
-        Vector3 goal =  intercept + new Vector3(interval.x/2,-0.05f,interval.z/2);
+        Vector3 intercept = new Vector3(_transform.position.x + interval.x/4,_transform.position.y + 0.05f,_transform.position.z + interval.z/2);
+        Vector3 goal =  intercept + new Vector3(interval.x/4,-0.05f,interval.z/2);
 
         if (Vector3.Magnitude(goal - Camera.gameObject.transform.position) < 0.42f)
         {
