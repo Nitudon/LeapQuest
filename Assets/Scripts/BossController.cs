@@ -6,7 +6,7 @@ using System;
 
 public class BossController :EnemyAbstractController{
 
-    private const int HIT_BREAK_POINT = 3;
+    private const int HIT_BREAK_POINT = 5;
     private const int PUNCH_TIME = 7;
 
     [SerializeField]
@@ -16,22 +16,52 @@ public class BossController :EnemyAbstractController{
     private int punchPoint;
     private Vector3 bossPosition;
     private bool isBreak;
+    private bool isPunch;
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Hand" && (_animator.GetCurrentAnimatorStateInfo(0).IsName("Punch") || _animator.GetCurrentAnimatorStateInfo(0).IsName("FaintPunch")))
+        if(!isPunch && _enemyLife > 0 &&  punchPoint > 0 && collision.gameObject.tag == "Hand" && _animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
         {
             punchPoint--;
             OnAttackedShake();
             if (punchPoint == 0)
             {
-                _animator.SetTrigger("Damage");
-                _enemyLife--;
-                transform.DOMove(bossPosition, 0.5f);
-                Debug.Log(_enemyLife);
-                punchPoint = HIT_BREAK_POINT;
+                StartCoroutine(PunchCoroutine());
             }
         }
+    }
+
+    protected override IEnumerator EnemyDeath()
+    {
+        GameObject _particle = Instantiate(DeathParticle, _transform.position, DeathParticle.transform.rotation) as GameObject;
+        EnemyDestroy();
+        yield return new WaitForSeconds(3f);
+        Destroy(_particle);
+        yield break;
+    }
+
+    private IEnumerator PunchCoroutine()
+    {
+        isPunch = false;
+        _animator.SetTrigger("Damage");
+        punchPoint = HIT_BREAK_POINT;
+        _enemyLife--;
+        yield return new WaitForSeconds(1f);
+        transform.DOMove(bossPosition, 0.5f);
+        Debug.Log(_enemyLife);
+        if (_enemyLife == 0)
+        {
+            StartCoroutine(BossDeathCoroutine());
+        }
+        yield return new WaitForSeconds(1f);
+        isPunch = true;
+    }
+
+    private IEnumerator BossDeathCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(EnemyDeath());
+        yield break;
     }
 
     protected override void OnAttacked(Collision collision)
@@ -66,6 +96,7 @@ public class BossController :EnemyAbstractController{
 
     protected override void Start()
     {
+        isPunch = false;
         bossPosition = transform.position;
         ATTACK_DAMAGE = 3;
         breakPoint = HIT_BREAK_POINT;

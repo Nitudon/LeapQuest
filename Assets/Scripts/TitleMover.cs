@@ -12,7 +12,8 @@ public class TitleMover : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Observable.Timer(System.TimeSpan.FromSeconds(0),System.TimeSpan.FromSeconds(6))
-            .Subscribe(_ => RandomMove());
+            .Subscribe(_ => RandomMove())
+            .AddTo(gameObject);
     }
 
     void RandomMove()

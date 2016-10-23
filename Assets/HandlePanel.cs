@@ -27,6 +27,7 @@ public class HandlePanel : MonoBehaviour {
             {
                 exaIndex = 0;
             }
+        StartCoroutine(WaitSetActive());
             exaObjects[exaIndex].SetActive(true);
             exaPanels[exaIndex].SetActive(true);
        
@@ -41,8 +42,16 @@ public class HandlePanel : MonoBehaviour {
         {
             exaIndex = exaPanels.Length - 1;
         }
+        StartCoroutine(WaitSetActive());
         exaObjects[exaIndex].SetActive(true);
         exaPanels[exaIndex].SetActive(true);
+    }
+
+    private IEnumerator WaitSetActive()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        yield break;
     }
 
 	// Use this for initialization

@@ -11,6 +11,7 @@ public class PlayerUIManager : MonoBehaviour {
     /// </summary>
     public Player _player;
     private static PlayerUIManager _instance;
+    private AudioManager audioPlayer;//BGM管理
     private PlayerMover _playerMover;
     private Image _lifeBar;
     private Text _lifeText;
@@ -29,6 +30,7 @@ public class PlayerUIManager : MonoBehaviour {
     public void Init()
     {
         _player = new Player();
+        audioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         _lifeBar = GameObject.FindGameObjectWithTag("LifeBar").GetComponent<Image>();
         _lifeText = GameObject.FindGameObjectWithTag("LifeText").GetComponent<Text>();
         _playerMover = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
@@ -54,6 +56,10 @@ public class PlayerUIManager : MonoBehaviour {
                 _instance._player._life
                     .Where(x => x <= 0)
                     .Subscribe(_ => _instance.GameOver());
+
+                Observable.EveryUpdate()
+                    .Where(_ => Input.GetKeyDown(KeyCode.Space))
+                    .Subscribe(_ => _instance._player.LifeAffect(-99));
             }
             return _instance;
         }
@@ -78,6 +84,7 @@ public class PlayerUIManager : MonoBehaviour {
         if (Instance._player._life.Value - point >= 0)
         {
             Instance._player.LifeAffect(point);
+            audioPlayer.SoundEffect(AudioManager.SE.Damaged);
         }
         else
         {

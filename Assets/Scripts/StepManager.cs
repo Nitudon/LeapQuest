@@ -48,6 +48,25 @@ public class StepManager : MonoBehaviour {
         audioPlayer.SoundChange(AudioManager.Music.walk);
     }
 
+    public void OnBattleEnd()
+    {
+        if (battleStep < 5)
+        {
+            OnWalk();
+        }
+
+        else if(battleStep == 5)
+        {
+            GameClearStep();
+        }
+    }
+
+    public void GameClearStep()
+    {
+        FadeCanvas.DOFade(1, 3f)
+        .OnComplete(() => SceneManager.LoadScene("GameClear"));
+    }
+
     public void GameOverStep()
     {
         FadeCanvas.DOFade(1, 3f)

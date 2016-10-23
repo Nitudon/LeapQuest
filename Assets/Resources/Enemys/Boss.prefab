@@ -850,7 +850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6541c0125e9a9b48bdbc8d84822deae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathParticle: {fileID: 154578, guid: 44c98f26a1b0ba140a8ca36ee07a6546, type: 2}
+  DeathParticle: {fileID: 1000010224523962, guid: 41d3b10d8e83e6b42afedd8996788103,
+    type: 2}
   AttackParticle: {fileID: 0}
   EnemyLife: 5
   DeathTime: 0

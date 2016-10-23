@@ -1,0 +1,78 @@
+Initialize engine version: 5.4.1f1 (649f48bbbf0f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 960M (ID=0x139b)
+    Vendor:   NVIDIA
+    VRAM:     2018 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween43.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween43.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween46.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween46.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween50.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\DOTween50.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\GETween.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\GETween.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\GUIAnimatorFREE.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\GUIAnimatorFREE.dll into Unity Child Domain
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\LeapCSharp.NET3.5.dll (this message is harmless)
+Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\LeapCSharp.NET3.5.dll into Unity Child Domain
+- Completed reload, in  0.115 seconds
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\System.dll (this message is harmless)
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initialized touch support.
+UnloadTime: 1.162270 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 52e4 -> priority: 1 
+  Thread -> id: 5078 -> priority: 1 
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 8.253228 ms
+
+Unloading 84 unused Assets to reduce memory usage. Loaded Objects now: 1443.
+Total: 0.959209 ms (FindLiveObjects: 0.088493 ms CreateObjectMapping: 0.050962 ms MarkObjects: 0.658962 ms  DeleteObjects: 0.160394 ms)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "Camera/LeapHandController/RigidRoundHand_R/index/bone2"
+ 
+(Filename:  Line: 0)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.085924 ms
+There are two Singleton objects:PlayerUI
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+
+Unloading 33 unused Assets to reduce memory usage. Loaded Objects now: 2473.
+Total: 1.865084 ms (FindLiveObjects: 0.107851 ms CreateObjectMapping: 0.054123 ms MarkObjects: 1.599208 ms  DeleteObjects: 0.103506 ms)
+
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.719997 ms
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 1274.
+Total: 0.941036 ms (FindLiveObjects: 0.061234 ms CreateObjectMapping: 0.076246 ms MarkObjects: 0.720196 ms  DeleteObjects: 0.082172 ms)
+
+UnloadTime: 0.902715 ms
+There are two Singleton objects:PlayerUI
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+

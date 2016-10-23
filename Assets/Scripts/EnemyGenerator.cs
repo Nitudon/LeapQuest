@@ -19,9 +19,9 @@ public class EnemyGenerator : MonoBehaviour {
 
     //出現場所
     private readonly Vector3[] GENERATE_POSITIONS_X = new Vector3[]{
-        new Vector3(-0.3f,0f,0.7f),
+        new Vector3(-0.25f,0f,0.7f),
         new Vector3(0f,0f,0.7f),
-        new Vector3(0.3f,0f,0.7f)
+        new Vector3(0.25f,0f,0.7f)
     };
 
     private readonly Vector3[] GENERATE_POSITIONS_Z = new Vector3[]{
@@ -30,7 +30,7 @@ public class EnemyGenerator : MonoBehaviour {
         new Vector3(0f,0f,1f)
     };
 
-    private readonly Vector3 BOSS_POSITION = new Vector3(-1.04f,-3.6027f,0.91f);
+    private readonly Vector3 BOSS_POSITION = new Vector3(-1.24f,-3.6027f,0.91f);
 
     //敵の情報のイニシャライズ
     public void Init()

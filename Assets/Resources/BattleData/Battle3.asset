@@ -23,12 +23,12 @@ MonoBehaviour:
     - Enemy: 0
       PlaceX: 1
       PlaceZ: 1
-  - Time: 10
+  - Time: 12
     EnemyEntrys:
     - Enemy: 1
       PlaceX: 1
       PlaceZ: 2
-    - Enemy: 3
+    - Enemy: 0
       PlaceX: 0
       PlaceZ: 1
     - Enemy: 3
@@ -37,7 +37,7 @@ MonoBehaviour:
     - Enemy: 1
       PlaceX: 1
       PlaceZ: 0
-  - Time: 15
+  - Time: 19
     EnemyEntrys:
     - Enemy: 0
       PlaceX: 2
@@ -47,8 +47,8 @@ MonoBehaviour:
       PlaceZ: 1
     - Enemy: 3
       PlaceX: 1
-      PlaceZ: 0
-    - Enemy: 3
+      PlaceZ: 1
+    - Enemy: 0
       PlaceX: 0
       PlaceZ: 1
     - Enemy: 3

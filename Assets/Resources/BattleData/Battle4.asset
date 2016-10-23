@@ -26,7 +26,7 @@ MonoBehaviour:
     - Enemy: 0
       PlaceX: 2
       PlaceZ: 1
-  - Time: 10
+  - Time: 12
     EnemyEntrys:
     - Enemy: 1
       PlaceX: 2
@@ -43,38 +43,38 @@ MonoBehaviour:
     - Enemy: 2
       PlaceX: 2
       PlaceZ: 0
-  - Time: 15
-    EnemyEntrys:
-    - Enemy: 0
-      PlaceX: 1
-      PlaceZ: 0
-    - Enemy: 0
-      PlaceX: 0
-      PlaceZ: 0
-    - Enemy: 2
-      PlaceX: 2
-      PlaceZ: 0
-    - Enemy: 3
-      PlaceX: 1
-      PlaceZ: 2
-    - Enemy: 2
-      PlaceX: 0
-      PlaceZ: 1
-    - Enemy: 2
-      PlaceX: 2
-      PlaceZ: 1
-    - Enemy: 3
-      PlaceX: 0
-      PlaceZ: 2
   - Time: 18
     EnemyEntrys:
+    - Enemy: 0
+      PlaceX: 1
+      PlaceZ: 0
+    - Enemy: 0
+      PlaceX: 0
+      PlaceZ: 0
+    - Enemy: 2
+      PlaceX: 2
+      PlaceZ: 0
+    - Enemy: 3
+      PlaceX: 1
+      PlaceZ: 2
+    - Enemy: 2
+      PlaceX: 0
+      PlaceZ: 1
+    - Enemy: 2
+      PlaceX: 2
+      PlaceZ: 1
+    - Enemy: 3
+      PlaceX: 0
+      PlaceZ: 2
+  - Time: 25
+    EnemyEntrys:
     - Enemy: 1
       PlaceX: 0
       PlaceZ: 1
     - Enemy: 3
       PlaceX: 2
       PlaceZ: 1
-  - Time: 24
+  - Time: 30
     EnemyEntrys:
     - Enemy: 3
       PlaceX: 1
@@ -91,3 +91,20 @@ MonoBehaviour:
     - Enemy: 2
       PlaceX: 2
       PlaceZ: 1
+  - Time: 34
+    EnemyEntrys:
+    - Enemy: 0
+      PlaceX: 1
+      PlaceZ: 1
+    - Enemy: 1
+      PlaceX: 2
+      PlaceZ: 1
+    - Enemy: 0
+      PlaceX: 0
+      PlaceZ: 0
+    - Enemy: 2
+      PlaceX: 2
+      PlaceZ: 0
+    - Enemy: 0
+      PlaceX: 1
+      PlaceZ: 0

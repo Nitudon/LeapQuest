@@ -51,9 +51,9 @@ public class EnemyManager : MonoBehaviour {
         //戦闘終了処理
         EnemyNum
             .Skip(1)
-            .Where(x => x == 0)
+            .Where(x => x == 0 && StepManager.Instance.battleStep<5)
             .Delay(System.TimeSpan.FromSeconds(2f))
-            .Subscribe(_ => StepManager.Instance.OnWalk());
+            .Subscribe(_ => StepManager.Instance.OnBattleEnd());
     }
 
     public void EnemyDestroy()

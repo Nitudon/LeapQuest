@@ -17,8 +17,8 @@ public class FlyingEnemyController : EnemyAbstractController {
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(transform.DOMove(transform.position + new Vector3(0f,0.02f,-0.05f),0.8f));
-        seq.Append(transform.DOMove(transform.position + new Vector3(0f, 0f, -0.1f), 0.8f));
+        seq.Append(transform.DOMove(transform.position + new Vector3(0f,0.02f,-0.12f),0.8f));
+        seq.Append(transform.DOMove(transform.position + new Vector3(0f, 0f, -0.24f), 0.8f));
     }
 
     protected override void EnemyAttack()

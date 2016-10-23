@@ -20,6 +20,7 @@ namespace Leap.Unity
 
         private List<HandPool.ModelGroup> handmodels;
         private HandPool.ModelGroup handmodel;
+        private AudioManager audioPlayer;
         private IHandModel leftModel;
         private IHandModel rightModel;
 
@@ -47,13 +48,14 @@ namespace Leap.Unity
         void Start()
         {
             canvas.DOFade(0, 3f);
-
+            audioPlayer = transform.parent.GetComponent<AudioManager>();
             handmodels = GetComponent<HandPool>().ModelPool;
             handmodel = handmodels[0];
             leftModel = handmodel.LeftModel;
             rightModel = handmodel.RightModel;
 
             StartGutsObservable()
+                .First()
                 .Subscribe(_ => FadeScene());
         }
 
@@ -69,6 +71,7 @@ namespace Leap.Unity
 
         private void FadeScene()
         {
+            audioPlayer.SoundEffect(AudioManager.SE.Trans);
             canvas.DOFade(1,3f)
                 .OnComplete(() => SceneManager.LoadScene(fadeScene));
         }

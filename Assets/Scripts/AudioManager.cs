@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour {
 
     public enum Music {walk,battle,boss}
 
-    public enum SE { Damaged,EnemyDeath,Reflect}
+    public enum SE { Damaged,EnemyDeath,Reflect,Trans}
 
     private AudioSource _audioSource;
 	// Use this for initialization
