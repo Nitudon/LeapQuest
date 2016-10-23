@@ -163,7 +163,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     protected virtual System.IDisposable EnemyRoutineDisposable()
     {
         var disposable = Observable.Interval(System.TimeSpan.FromSeconds(BEHAVE_TIME))
-           .Where(_ => !_isAttacked)
+           .Where(_ => !_isAttacked && BEHAVE_TIME > 0)
            .Subscribe(_ => EnemyBehave())
            .AddTo(gameObject);
 

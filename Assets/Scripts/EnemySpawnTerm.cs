@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 using System.Collections;
 /// <summary>
 /// 敵の出現情報、一回に生成する全ての情報とその時間
 /// </summary>
-[CanEditMultipleObjects]
 [System.Serializable]
 public class EnemySpawnTerm 
 {

@@ -15,6 +15,9 @@ namespace Leap.Unity
         [SerializeField]
         private CanvasGroup canvas;
 
+        [SerializeField]
+        private string fadeScene;
+
         private List<HandPool.ModelGroup> handmodels;
         private HandPool.ModelGroup handmodel;
         private IHandModel leftModel;
@@ -43,6 +46,8 @@ namespace Leap.Unity
 
         void Start()
         {
+            canvas.DOFade(0, 3f);
+
             handmodels = GetComponent<HandPool>().ModelPool;
             handmodel = handmodels[0];
             leftModel = handmodel.LeftModel;
@@ -65,7 +70,7 @@ namespace Leap.Unity
         private void FadeScene()
         {
             canvas.DOFade(1,3f)
-                .OnComplete(() => SceneManager.LoadScene("Main"));
+                .OnComplete(() => SceneManager.LoadScene(fadeScene));
         }
 
     }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 /// 敵の出現情報、1回のバトルの情報
 /// </summary>
 
-[CanEditMultipleObjects]
 [System.Serializable]
 public class EnemySpawnTable:ScriptableObject{
 

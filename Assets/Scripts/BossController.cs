@@ -74,12 +74,19 @@ public class BossController :EnemyAbstractController{
         base.Start();
     }
 
+    private IEnumerator RockAttack()
+    {
+        _animator.SetTrigger("Rock");
+        yield return new WaitForSeconds(1.2f);
+        GameObject attackRock = Instantiate(AttackRock, _transform.position + new Vector3(-0.2f, 0.1f, 0f), _transform.rotation) as GameObject;
+        yield break;
+    }
+
     protected override void EnemyBehave()
     {
         if (!isBreak)
         {
-            _animator.SetTrigger("Rock");
-            GameObject attackRock = Instantiate(AttackRock, _transform.position + new Vector3(-0.2f, 0.1f, 0f), _transform.rotation) as GameObject;
+            StartCoroutine(RockAttack());
         }
         else
         {

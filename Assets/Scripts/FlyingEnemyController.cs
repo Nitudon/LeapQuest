@@ -7,18 +7,18 @@ public class FlyingEnemyController : EnemyAbstractController {
 
     protected override void Start()
     {
-        BEHAVE_TIME = 1f;
+        BEHAVE_TIME = 1.7f;
         base.Start();
     }
 
     protected override void EnemyBehave()
     {
-        Vector3 goal = transform.position - new Vector3(0f,0f,0.1f);
-        Vector3 intercept = transform.position += new Vector3(0f,0.02f,-0.05f);
+        transform.DOKill();
 
-        Vector3[] path = new Vector3[] { intercept,goal};
+        Sequence seq = DOTween.Sequence();
 
-        transform.DOPath(path, 1f,PathType.CatmullRom);
+        seq.Append(transform.DOMove(transform.position + new Vector3(0f,0.02f,-0.05f),0.8f));
+        seq.Append(transform.DOMove(transform.position + new Vector3(0f, 0f, -0.1f), 0.8f));
     }
 
     protected override void EnemyAttack()
@@ -28,6 +28,7 @@ public class FlyingEnemyController : EnemyAbstractController {
 
     protected override IEnumerator EnemyDeath()
     {
+        transform.DOKill();
         return base.EnemyDeath();
     }
 }
