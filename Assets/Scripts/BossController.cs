@@ -6,7 +6,7 @@ using System;
 
 public class BossController :EnemyAbstractController{
 
-    private const int HIT_BREAK_POINT = 5;
+    private const int HIT_BREAK_POINT = 3;
     private const int PUNCH_TIME = 7;
 
     [SerializeField]
@@ -28,6 +28,7 @@ public class BossController :EnemyAbstractController{
             {
                 StartCoroutine(PunchCoroutine());
             }
+
         }
     }
 
@@ -42,9 +43,8 @@ public class BossController :EnemyAbstractController{
 
     private IEnumerator PunchCoroutine()
     {
-        isPunch = false;
+        isPunch = true;
         _animator.SetTrigger("Damage");
-        punchPoint = HIT_BREAK_POINT;
         _enemyLife--;
         yield return new WaitForSeconds(1f);
         transform.DOMove(bossPosition, 0.5f);
@@ -54,7 +54,7 @@ public class BossController :EnemyAbstractController{
             StartCoroutine(BossDeathCoroutine());
         }
         yield return new WaitForSeconds(1f);
-        isPunch = true;
+        isPunch = false;
     }
 
     private IEnumerator BossDeathCoroutine()
@@ -62,11 +62,6 @@ public class BossController :EnemyAbstractController{
         yield return new WaitForSeconds(2f);
         StartCoroutine(EnemyDeath());
         yield break;
-    }
-
-    protected override void OnAttacked(Collision collision)
-    {
-        base.OnAttacked(collision);
     }
 
     protected override void OnTriggerEnter(Collider collider)
@@ -105,7 +100,7 @@ public class BossController :EnemyAbstractController{
         base.Start();
     }
 
-    private IEnumerator RockAttack()
+    protected IEnumerator RockAttack()
     {
         _animator.SetTrigger("Rock");
         yield return new WaitForSeconds(1.2f);
@@ -121,7 +116,7 @@ public class BossController :EnemyAbstractController{
         }
         else
         {
-            EnemyAttack();
+            StartCoroutine(EnemyAttackCoroutine());
         }
     }
 
@@ -148,9 +143,35 @@ public class BossController :EnemyAbstractController{
         return disposable;
     }
 
+    private void ModeChange()
+    {
+
+
+        Observable.Interval(System.TimeSpan.FromSeconds(PUNCH_TIME))
+                                       .Where(_ => !_isAttacked)
+                                       .Subscribe(_ => EnemyBehave())
+                                       .AddTo(gameObject);
+    }
+
     protected override void EnemyAttack()
     {
+        throw new NotImplementedException();
+    }
+
+    private IEnumerator EnemyAttackCoroutine()
+    {
+        punchPoint = HIT_BREAK_POINT;
         _animator.SetTrigger("Punch");
+        if (!isPunch)
+        {
+            yield return new WaitForSeconds(2f);
+            transform.DOMove(bossPosition, 0.5f);
+            yield break;
+        }
+        else
+        {
+            yield break;
+        }
     }
 
 

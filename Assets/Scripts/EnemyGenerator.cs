@@ -30,8 +30,12 @@ public class EnemyGenerator : MonoBehaviour {
         new Vector3(0f,0f,1f)
     };
 
-    private readonly Vector3 BOSS_POSITION = new Vector3(-1.24f,-3.6027f,0.91f);
+    private readonly Vector3 BOSS_POSITION = new Vector3(-1.24f, -3.759f, 0.91f);
 
+    private readonly Vector3[] BOSS_Tip_POSITIONS = new Vector3[] {
+        new Vector3(-1.24f, -3.759f, 1.26f),
+        new Vector3(-1.24f, -3.759f, 0.76f)
+    };
     //敵の情報のイニシャライズ
     public void Init()
     {
@@ -41,6 +45,7 @@ public class EnemyGenerator : MonoBehaviour {
         Enemys.Add(Resources.Load("Enemys/Shielder") as GameObject);
         Enemys.Add(Resources.Load("Enemys/Flydevil") as GameObject);
         Enemys.Add(Resources.Load("Enemys/Boss") as GameObject);
+        Enemys.Add(Resources.Load("Enemys/BossTip") as GameObject);
     }
 
     //バトル開始時に敵の生成システムを立ち上げる
@@ -92,5 +97,6 @@ public class EnemyGenerator : MonoBehaviour {
             }
         }
     }
+
 
 }

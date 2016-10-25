@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Leap;
 using UniRx;
+using UniRx.Triggers;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
@@ -16,13 +17,44 @@ namespace Leap.Unity
         private CanvasGroup canvas;
 
         [SerializeField]
+        private CanvasGroup logoCanvas;
+
+        [SerializeField]
         private string fadeScene;
+
+        [SerializeField]
+        private GameObject StartObject;
+
+        [SerializeField]
+        private GameObject EndObject;
 
         private List<HandPool.ModelGroup> handmodels;
         private HandPool.ModelGroup handmodel;
         private AudioManager audioPlayer;
         private IHandModel leftModel;
         private IHandModel rightModel;
+        private static bool gameStart;
+
+        private IObservable<UnityEngine.Collider> OnTriggerEnterObservable(GameObject obj)
+        {
+            return obj.OnTriggerEnterAsObservable();
+                //.Where(x => x.gameObject == StartObject);
+        }
+
+        private IObservable<UnityEngine.Collider> OnTriggerExitObservable(GameObject obj)
+        {
+            return obj.OnTriggerExitAsObservable()
+                .Where(x => x.gameObject == StartObject);
+        }
+
+        private IObservable<long> OnTriggerHoldObservable(GameObject obj)
+        {
+            return
+                OnTriggerEnterObservable(obj)
+                .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(2)))
+                .TakeUntil(OnTriggerExitObservable(obj))
+                .RepeatUntilDestroy(this);
+        }
 
         private IObservable<long> DoubleGutsObservable()
         {
@@ -47,12 +79,27 @@ namespace Leap.Unity
 
         void Start()
         {
-            canvas.DOFade(0, 3f);
+            if(Application.loadedLevelName == "Title" && !gameStart)
+            {
+                gameStart = true;
+                Sequence seq = DOTween.Sequence();
+                seq.Append(logoCanvas.DOFade(1, 3f));
+                seq.Append(logoCanvas.DOFade(0, 3f));
+                seq.OnComplete(() => canvas.DOFade(0, 3f));
+            }
+            else
+            {
+                canvas.DOFade(0, 3f);
+            }
+
             audioPlayer = transform.parent.GetComponent<AudioManager>();
             handmodels = GetComponent<HandPool>().ModelPool;
             handmodel = handmodels[0];
             leftModel = handmodel.LeftModel;
             rightModel = handmodel.RightModel;
+
+            OnTriggerHoldObservable(StartObject)
+                .Subscribe(_ => Debug.Log("aa"));
 
             StartGutsObservable()
                 .First()

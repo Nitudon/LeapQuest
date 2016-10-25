@@ -7,6 +7,9 @@ public class RockController : MonoBehaviour {
     private Vector3 enemyPos;
     private Vector3 cameraPos;
 
+    [SerializeField]
+    private GameObject ExplosionParticle;
+
     [HideInInspector]
     public bool isReflect { get; private set; }
 
@@ -16,8 +19,22 @@ public class RockController : MonoBehaviour {
     {
         enemyPos = gameObject.transform.position;
         isReflect = false;
-        gameObject.transform.DOPath(RockPath(pathDirection.player), 3f, PathType.CatmullRom);
+
+        gameObject.transform.DOPath(RockPath(pathDirection.player), RockSpeed(), PathType.CatmullRom);
            
+    }
+
+    private float RockSpeed()
+    {
+        if(this.tag == "Rock")
+        {
+            return 3f;
+        }
+
+        else
+        {
+            return 5f;
+        }
     }
 
     Vector3[] RockPath(pathDirection dir)
@@ -53,9 +70,18 @@ public class RockController : MonoBehaviour {
 
         else if(collider.tag == "Hand" && !isReflect)
         {
-            isReflect = true;
             gameObject.transform.DOKill();
-            gameObject.transform.DOPath(RockPath(pathDirection.enemy), 3f, PathType.CatmullRom);
+            if (this.tag == "Rock")
+            {
+                isReflect = true;
+                gameObject.transform.DOPath(RockPath(pathDirection.enemy), 3f, PathType.CatmullRom);
+            }
+
+            else if(this.tag == "FireRock")
+            {
+                Instantiate(ExplosionParticle,transform.position,ExplosionParticle.transform.rotation);
+                Destroy(gameObject);
+            }
         }
 
     }

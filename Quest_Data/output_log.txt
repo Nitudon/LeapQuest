@@ -32,22 +32,22 @@ Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\
 Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\GUIAnimatorFREE.dll into Unity Child Domain
 Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\LeapCSharp.NET3.5.dll (this message is harmless)
 Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\LeapCSharp.NET3.5.dll into Unity Child Domain
-- Completed reload, in  0.115 seconds
+- Completed reload, in  0.556 seconds
 Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\System.dll (this message is harmless)
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initialized touch support.
-UnloadTime: 1.162270 ms
+UnloadTime: 1.134221 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 52e4 -> priority: 1 
-  Thread -> id: 5078 -> priority: 1 
+  Thread -> id: 3ea0 -> priority: 1 
+  Thread -> id: 3eac -> priority: 1 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 8.253228 ms
+UnloadTime: 16.739937 ms
 
-Unloading 84 unused Assets to reduce memory usage. Loaded Objects now: 1443.
-Total: 0.959209 ms (FindLiveObjects: 0.088493 ms CreateObjectMapping: 0.050962 ms MarkObjects: 0.658962 ms  DeleteObjects: 0.160394 ms)
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 1441.
+Total: 0.837135 ms (FindLiveObjects: 0.058074 ms CreateObjectMapping: 0.047802 ms MarkObjects: 0.664098 ms  DeleteObjects: 0.066765 ms)
 
 BoxColliders does not support negative scale or size.
 The effective box size has been forced positive and is likely to give unexpected collision geometry.
@@ -55,24 +55,122 @@ If you absolutely need to use negative scaling you can use the convex MeshCollid
  
 (Filename:  Line: 0)
 
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "Camera/LeapHandController/RigidRoundHand_R(Clone)/index/bone2"
+ 
+(Filename:  Line: 0)
+
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.085924 ms
+UnloadTime: 2.436343 ms
 There are two Singleton objects:PlayerUI
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 
-Unloading 33 unused Assets to reduce memory usage. Loaded Objects now: 2473.
-Total: 1.865084 ms (FindLiveObjects: 0.107851 ms CreateObjectMapping: 0.054123 ms MarkObjects: 1.599208 ms  DeleteObjects: 0.103506 ms)
+Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 2588.
+Total: 1.179258 ms (FindLiveObjects: 0.100345 ms CreateObjectMapping: 0.082962 ms MarkObjects: 0.667258 ms  DeleteObjects: 0.328691 ms)
 
-Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.719997 ms
+4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 1274.
-Total: 0.941036 ms (FindLiveObjects: 0.061234 ms CreateObjectMapping: 0.076246 ms MarkObjects: 0.720196 ms  DeleteObjects: 0.082172 ms)
+3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-UnloadTime: 0.902715 ms
+2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.763059 ms
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 1432.
+Total: 0.918517 ms (FindLiveObjects: 0.080592 ms CreateObjectMapping: 0.077036 ms MarkObjects: 0.705579 ms  DeleteObjects: 0.054123 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.475653 ms
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 2843.
+Total: 0.694122 ms (FindLiveObjects: 0.105086 ms CreateObjectMapping: 0.053333 ms MarkObjects: 0.511604 ms  DeleteObjects: 0.023703 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.490467 ms
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 2090.
+Total: 1.025579 ms (FindLiveObjects: 0.092444 ms CreateObjectMapping: 0.066765 ms MarkObjects: 0.820937 ms  DeleteObjects: 0.045037 ms)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "Camera/LeapHandController/RigidRoundHand_R/index/bone2"
+ 
+(Filename:  Line: 0)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "Camera/LeapHandController/RigidRoundHand_R(Clone)/index/bone2"
+ 
+(Filename:  Line: 0)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.042862 ms
 There are two Singleton objects:PlayerUI
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+
+Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 2915.
+Total: 1.494517 ms (FindLiveObjects: 0.188049 ms CreateObjectMapping: 0.173827 ms MarkObjects: 0.975011 ms  DeleteObjects: 0.157234 ms)
+
+4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.357626 ms
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 1757.
+Total: 0.713875 ms (FindLiveObjects: 0.092444 ms CreateObjectMapping: 0.054518 ms MarkObjects: 0.510024 ms  DeleteObjects: 0.056098 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.672394 ms
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 3168.
+Total: 0.787752 ms (FindLiveObjects: 0.120888 ms CreateObjectMapping: 0.055308 ms MarkObjects: 0.585876 ms  DeleteObjects: 0.025283 ms)
+
+InvalidOperationException: sequence is empty
+  at UniRx.Stubs.<Throw>m__83 (System.Exception ex) [0x00000] in <filename unknown>:0 
+  at UniRx.Observer+Subscribe`1[System.Int64].OnError (System.Exception error) [0x00000] in <filename unknown>:0 
+  at UniRx.Operators.FirstObservable`1+First[System.Int64].OnCompleted () [0x00000] in <filename unknown>:0 
+  at UniRx.Operators.RepeatUntilObservable`1+RepeatUntil[System.Int64].<Run>m__DB (Unit _) [0x00000] in <filename unknown>:0 
+  at UniRx.Observer+Subscribe`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
+  at UniRx.Subject`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
+  at UniRx.Triggers.ObservableDestroyTrigger.OnDestroy () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 

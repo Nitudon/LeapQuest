@@ -7,7 +7,7 @@ using System.Collections;
 /// </summary>
 public class TitleCameraMover : MonoBehaviour {
 
-	void Start () {
+    void Start () {
         transform.DORotate(new Vector3(0f, 360f, 0f), 30f)
             .SetRelative()
             .SetLoops(100);
