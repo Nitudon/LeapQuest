@@ -11,7 +11,7 @@ public class SpeedEnemyBehabiour : EnemyAbstractController{
 
     protected override void Start()
     {
-        BEHAVE_TIME = 2f;
+        BEHAVE_TIME = 1.5f;
         base.Start();
     }
 

@@ -47,7 +47,8 @@ public class StepManager : MonoBehaviour {
         _instance.PauseObject = GameObject.Find("StartObject");
         _instance.PauseTint = UICanvas.transform.FindChild("PauseTint").gameObject;
         _instance.FadeCanvas = GameObject.FindGameObjectWithTag("Fade").GetComponent<CanvasGroup>();
-        _instance.BattleComments = GameObject.Find("TextPanel").GetComponentsInChildren<Text>(true);
+        _instance.BattleCommentPanel = GameObject.Find("TextPanel");
+        _instance.BattleComments = BattleCommentPanel.GetComponentsInChildren<Text>(true);
         _instance.Handpalm = GameObject.FindGameObjectsWithTag("Hand");
         _instance.battleStep = 0;
         
@@ -70,6 +71,9 @@ public class StepManager : MonoBehaviour {
         }
     }
 
+    private const float TEXTPANEL_FADE_IN = -335f;
+    private const float TEXTPANEL_FADE_OUT = -575f;
+
     public int battleStep { get; private set; }//現在のバトルステップ
     private GameObject[] Handpalm;
     private GameObject PauseObject;
@@ -77,6 +81,7 @@ public class StepManager : MonoBehaviour {
     private AudioManager audioPlayer;//BGM管理
     private UIManager UICanvas;//バトルヘッダー
     private CanvasGroup FadeCanvas;
+    private GameObject BattleCommentPanel;
     private Text[] BattleComments;
     //バトル終了、及び最初の移動
     public void OnWalk()
@@ -115,6 +120,7 @@ public class StepManager : MonoBehaviour {
     //ステップ更新とバトル通知
     public void OnBattle()
     {
+        StartCoroutine(BattleComment());
         EnemyManager.Instance.BattleStart(battleStep);
         BattleComments[battleStep].gameObject.SetActive(true);
         UICanvas.OnBattle(++battleStep);
@@ -129,9 +135,18 @@ public class StepManager : MonoBehaviour {
         }
     }
 
+    private IEnumerator BattleComment()
+    {
+        BattleComments[battleStep].gameObject.SetActive(true);
+        BattleCommentPanel.transform.DOLocalMoveY(TEXTPANEL_FADE_IN,1f);
+        yield return new WaitForSeconds(10f);
+        BattleCommentPanel.transform.DOLocalMoveY(TEXTPANEL_FADE_OUT, 3f);
+        yield break;
+
+    }
+
     private void OnPause(GameObject obj)
     {
-        Debug.Log("a");
 
         if(Time.timeScale == 0)
         {

@@ -3650,7 +3650,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496.34, y: 145.8}
+  m_AnchoredPosition: {x: 321.1, y: 116.5}
   m_SizeDelta: {x: 700, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &566062243
@@ -3670,7 +3670,7 @@ MonoBehaviour:
   delay: 0
   style: 0
   playOnAwake: 1
-  m_progress: 0
+  m_progress: 0.0000075000003
   usePosition: 1
   useRotation: 0
   useScale: 1
@@ -9422,11 +9422,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010890078970, guid: cf8a3c56f9be7d241809009bc3cc44bb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.33
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 4000010890078970, guid: cf8a3c56f9be7d241809009bc3cc44bb, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 4000010890078970, guid: cf8a3c56f9be7d241809009bc3cc44bb, type: 2}
       propertyPath: m_LocalPosition.z
