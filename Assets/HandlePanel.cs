@@ -5,8 +5,8 @@ using System.Collections;
 
 public class HandlePanel : MonoBehaviour {
 
-    private Collider leftCollider;
-    private Collider rightCollider;
+    private GameObject leftCollider;
+    private GameObject rightCollider;
 
     private int exaIndex;
 
@@ -58,12 +58,15 @@ public class HandlePanel : MonoBehaviour {
 	void Start () {
         exaIndex = 0;
 
-        this.OnTriggerEnterAsObservable()
-            .Where(x => x.name == "Left")
+        leftCollider = GameObject.Find("Left");
+        rightCollider = GameObject.Find("Right");
+
+        leftCollider.OnTriggerEnterAsObservable()
+            .Where(x => x.tag == "Hand")
             .Subscribe(_ => UIChangeLeft());
 
-        this.OnTriggerEnterAsObservable()
-            .Where(x => x.name == "Right")
+        rightCollider.OnTriggerEnterAsObservable()
+            .Where(x => x.tag == "Hand")
             .Subscribe(_ => UIChangeRight());
 
     }

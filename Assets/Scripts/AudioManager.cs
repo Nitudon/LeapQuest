@@ -20,6 +20,11 @@ public class AudioManager : MonoBehaviour {
         _audioSource = GetComponent<AudioSource>();
 	}
 	
+    public void OnPlay()
+    {
+        _audioSource.Play();
+    }
+
     public void SoundEffect(SE effect)
     {
         _audioSource.PlayOneShot(SoundEffects[(int)effect]);

@@ -23,7 +23,6 @@ namespace Leap.Unity
         public override void InitHand()
         {
             base.InitHand();
-            SwordObject.SetActive(false);
         }
 
         public override void UpdateHand()

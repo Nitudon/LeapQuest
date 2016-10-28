@@ -33,18 +33,17 @@ namespace Leap.Unity
         private AudioManager audioPlayer;
         private IHandModel leftModel;
         private IHandModel rightModel;
-        private static bool gameStart;
 
         private IObservable<UnityEngine.Collider> OnTriggerEnterObservable(GameObject obj)
         {
-            return obj.OnTriggerEnterAsObservable();
-                //.Where(x => x.gameObject == StartObject);
+            return obj.OnTriggerEnterAsObservable()
+            .Where(x => x.tag == "Hand");
         }
 
         private IObservable<UnityEngine.Collider> OnTriggerExitObservable(GameObject obj)
         {
             return obj.OnTriggerExitAsObservable()
-                .Where(x => x.gameObject == StartObject);
+               .Where(x => x.tag == "Hand");
         }
 
         private IObservable<long> OnTriggerHoldObservable(GameObject obj)
@@ -79,13 +78,18 @@ namespace Leap.Unity
 
         void Start()
         {
-            if(Application.loadedLevelName == "Title" && !gameStart)
+
+            if(Application.loadedLevelName == "Title")
             {
-                gameStart = true;
                 Sequence seq = DOTween.Sequence();
                 seq.Append(logoCanvas.DOFade(1, 3f));
                 seq.Append(logoCanvas.DOFade(0, 3f));
-                seq.OnComplete(() => canvas.DOFade(0, 3f));
+                seq.OnComplete(() => {
+                    canvas.DOFade(0, 1f);
+                    StartObject.SetActive(true);
+                    EndObject.SetActive(true);
+                    audioPlayer.OnPlay();
+                });
             }
             else
             {
@@ -99,11 +103,11 @@ namespace Leap.Unity
             rightModel = handmodel.RightModel;
 
             OnTriggerHoldObservable(StartObject)
-                .Subscribe(_ => Debug.Log("aa"));
-
-            StartGutsObservable()
-                .First()
                 .Subscribe(_ => FadeScene());
+
+            OnTriggerHoldObservable(EndObject)
+                .First()
+                .Subscribe(_ => Application.Quit());
         }
 
         private bool isGuts(IHandModel hand)

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,28 @@ using DG.Tweening;
 /// 進行管理、ステップ数の記憶や、それに関わる命令を行う
 /// </summary>
 public class StepManager : MonoBehaviour {
+
+     private IObservable<UnityEngine.Collider> OnTriggerEnterObservable(GameObject obj)
+    {
+        return obj.OnTriggerEnterAsObservable()
+            .Where(x => x.gameObject == PauseObject);
+    }
+
+    private IObservable<UnityEngine.Collider> OnTriggerExitObservable(GameObject obj)
+    {
+        return obj.OnTriggerExitAsObservable()
+           .Where(x => x.gameObject == PauseObject);
+    }
+
+    private IObservable<long> OnTriggerHoldObservable(GameObject obj)
+    {
+        return
+            OnTriggerEnterObservable(obj)
+            .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(2)))
+            .TakeUntil(OnTriggerExitObservable(obj))
+            .RepeatUntilDestroy(this);
+    }
+
     //instance
     private static StepManager _instance;
 
@@ -21,12 +44,22 @@ public class StepManager : MonoBehaviour {
         _instance = GameObject.FindGameObjectWithTag("StepManager").GetComponent<StepManager>();
         _instance.audioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         _instance.UICanvas = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _instance.PauseObject = GameObject.Find("StartObject");
+        _instance.PauseTint = UICanvas.transform.FindChild("PauseTint").gameObject;
         _instance.FadeCanvas = GameObject.FindGameObjectWithTag("Fade").GetComponent<CanvasGroup>();
+        _instance.BattleComments = GameObject.Find("TextPanel").GetComponentsInChildren<Text>(true);
+        _instance.Handpalm = GameObject.FindGameObjectsWithTag("Hand");
         _instance.battleStep = 0;
         
         //スタート
         FadeCanvas.DOFade(0,3f)
         .OnComplete(() =>PlayerUIManager.Instance.OnPlayerWalk());
+
+        foreach (GameObject obj in Handpalm)
+        {
+            OnTriggerHoldObservable(obj)
+            .Subscribe(_ => OnPause(obj));
+        }
     }
 
     //get_instance
@@ -38,9 +71,13 @@ public class StepManager : MonoBehaviour {
     }
 
     public int battleStep { get; private set; }//現在のバトルステップ
+    private GameObject[] Handpalm;
+    private GameObject PauseObject;
+    private GameObject PauseTint;
     private AudioManager audioPlayer;//BGM管理
     private UIManager UICanvas;//バトルヘッダー
     private CanvasGroup FadeCanvas;
+    private Text[] BattleComments;
     //バトル終了、及び最初の移動
     public void OnWalk()
     {
@@ -50,6 +87,8 @@ public class StepManager : MonoBehaviour {
 
     public void OnBattleEnd()
     {
+        BattleComments[battleStep - 1].gameObject.SetActive(false);
+
         if (battleStep < 5)
         {
             OnWalk();
@@ -77,10 +116,36 @@ public class StepManager : MonoBehaviour {
     public void OnBattle()
     {
         EnemyManager.Instance.BattleStart(battleStep);
+        BattleComments[battleStep].gameObject.SetActive(true);
         UICanvas.OnBattle(++battleStep);
-        audioPlayer.SoundChange(AudioManager.Music.battle);
+        if (battleStep < 5)
+        {
+            audioPlayer.SoundChange(AudioManager.Music.battle);
+        }
+
+        else
+        {
+            audioPlayer.SoundChange(AudioManager.Music.boss);
+        }
     }
 
-    
+    private void OnPause(GameObject obj)
+    {
+        Debug.Log("a");
+
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            PauseTint.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            PauseTint.SetActive(true);
+        }
+
+        OnTriggerHoldObservable(obj)
+            .Subscribe(_ => OnPause(obj));
+    }
 
 }
