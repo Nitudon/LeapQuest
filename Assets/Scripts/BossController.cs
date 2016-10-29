@@ -6,7 +6,8 @@ using System;
 
 public class BossController :EnemyAbstractController{
 
-    private const int HIT_BREAK_POINT = 3;
+    private const int HIT_BREAK_POINT = 5;
+    private const int PUNCH_BREAK_POINT = 10;
     private const int PUNCH_TIME = 7;
 
     [SerializeField]
@@ -23,6 +24,7 @@ public class BossController :EnemyAbstractController{
         if(!isPunch && _enemyLife > 0 &&  punchPoint > 0 && collision.gameObject.tag == "Hand" && _animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
         {
             punchPoint--;
+            EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Damaged);
             OnAttackedShake();
             if (punchPoint == 0)
             {
@@ -71,6 +73,7 @@ public class BossController :EnemyAbstractController{
             if (collider.GetComponent<RockController>().isReflect)
             {
                 Destroy(collider.gameObject);
+                EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Damaged);
                 breakPoint--;
                 transform.DOKill();
                 OnAttackedShake();
@@ -104,6 +107,7 @@ public class BossController :EnemyAbstractController{
     {
         _animator.SetTrigger("Rock");
         yield return new WaitForSeconds(1.2f);
+        EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Throw);
         GameObject attackRock = Instantiate(AttackRock, _transform.position + new Vector3(-0.2f, 0.1f, 0f), _transform.rotation) as GameObject;
         yield break;
     }
@@ -145,8 +149,6 @@ public class BossController :EnemyAbstractController{
 
     private void ModeChange()
     {
-
-
         Observable.Interval(System.TimeSpan.FromSeconds(PUNCH_TIME))
                                        .Where(_ => !_isAttacked)
                                        .Subscribe(_ => EnemyBehave())
@@ -160,8 +162,10 @@ public class BossController :EnemyAbstractController{
 
     private IEnumerator EnemyAttackCoroutine()
     {
-        punchPoint = HIT_BREAK_POINT;
+        punchPoint = PUNCH_BREAK_POINT;
         _animator.SetTrigger("Punch");
+        yield return new WaitForSeconds(0.6f);
+        EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Tackle);
         if (!isPunch)
         {
             yield return new WaitForSeconds(2f);

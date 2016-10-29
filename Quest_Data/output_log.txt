@@ -32,18 +32,17 @@ Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\
 Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\GUIAnimatorFREE.dll into Unity Child Domain
 Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\LeapCSharp.NET3.5.dll (this message is harmless)
 Loading C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\LeapCSharp.NET3.5.dll into Unity Child Domain
-- Completed reload, in  0.171 seconds
+- Completed reload, in  0.084 seconds
 Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\住田直樹\Documents\LeapQuest\Quest_Data\Managed\System.dll (this message is harmless)
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initialized touch support.
-UnloadTime: 1.050863 ms
+UnloadTime: 1.093925 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 1820 -> priority: 1 
-  Thread -> id: 50a4 -> priority: 1 
-Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+  Thread -> id: 531c -> priority: 1 
+  Thread -> id: e28 -> priority: 1 
 InvalidOperationException: sequence is empty
   at UniRx.Stubs.<Throw>m__83 (System.Exception ex) [0x00000] in <filename unknown>:0 
   at UniRx.Observer+Subscribe`1[System.Int64].OnError (System.Exception error) [0x00000] in <filename unknown>:0 
@@ -55,59 +54,4 @@ InvalidOperationException: sequence is empty
   at UniRx.Triggers.ObservableDestroyTrigger.OnDestroy () [0x00000] in <filename unknown>:0 
  
 (Filename:  Line: -1)
-
-UnloadTime: 23.527487 ms
-
-Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 1405.
-Total: 1.214418 ms (FindLiveObjects: 0.056888 ms CreateObjectMapping: 0.063604 ms MarkObjects: 0.648690 ms  DeleteObjects: 0.444444 ms)
-
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-InvalidOperationException: sequence is empty
-  at UniRx.Stubs.<Throw>m__83 (System.Exception ex) [0x00000] in <filename unknown>:0 
-  at UniRx.Observer+Subscribe`1[System.Int64].OnError (System.Exception error) [0x00000] in <filename unknown>:0 
-  at UniRx.Operators.FirstObservable`1+First[System.Int64].OnCompleted () [0x00000] in <filename unknown>:0 
-  at UniRx.Operators.RepeatUntilObservable`1+RepeatUntil[System.Int64].<Run>m__DB (Unit _) [0x00000] in <filename unknown>:0 
-  at UniRx.Observer+Subscribe`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
-  at UniRx.InternalUtil.ListObserver`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
-  at UniRx.Subject`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
-  at UniRx.Triggers.ObservableDestroyTrigger.OnDestroy () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-UnloadTime: 8.239400 ms
-There are two Singleton objects:PlayerUI
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-
-Unloading 29 unused Assets to reduce memory usage. Loaded Objects now: 4175.
-Total: 1.417480 ms (FindLiveObjects: 0.181728 ms CreateObjectMapping: 0.082567 ms MarkObjects: 1.069826 ms  DeleteObjects: 0.082567 ms)
-
-Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.776093 ms
-
-Unloading 131 unused Assets to reduce memory usage. Loaded Objects now: 1524.
-Total: 2.203257 ms (FindLiveObjects: 0.133135 ms CreateObjectMapping: 0.145382 ms MarkObjects: 1.494122 ms  DeleteObjects: 0.429431 ms)
-
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-InvalidOperationException: sequence is empty
-  at UniRx.Stubs.<Throw>m__83 (System.Exception ex) [0x00000] in <filename unknown>:0 
-  at UniRx.Observer+Subscribe`1[System.Int64].OnError (System.Exception error) [0x00000] in <filename unknown>:0 
-  at UniRx.Operators.FirstObservable`1+First[System.Int64].OnCompleted () [0x00000] in <filename unknown>:0 
-  at UniRx.Operators.RepeatUntilObservable`1+RepeatUntil[System.Int64].<Run>m__DB (Unit _) [0x00000] in <filename unknown>:0 
-  at UniRx.Observer+Subscribe`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
-  at UniRx.InternalUtil.ListObserver`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
-  at UniRx.Subject`1[UniRx.Unit].OnNext (Unit value) [0x00000] in <filename unknown>:0 
-  at UniRx.Triggers.ObservableDestroyTrigger.OnDestroy () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-UnloadTime: 5.926711 ms
-There are two Singleton objects:PlayerUI
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-
-Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 4354.
-Total: 1.328196 ms (FindLiveObjects: 0.169876 ms CreateObjectMapping: 0.088493 ms MarkObjects: 1.037036 ms  DeleteObjects: 0.032395 ms)
 

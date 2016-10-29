@@ -66,6 +66,7 @@ public class GuardEnemyController : EnemyAbstractController{
 
     private void Guard()
     {
+        EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Guard);
         _animator.Play("Guard");
     }
 

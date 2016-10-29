@@ -3670,7 +3670,7 @@ MonoBehaviour:
   delay: 0
   style: 0
   playOnAwake: 1
-  m_progress: 0.0000075000003
+  m_progress: 0
   usePosition: 1
   useRotation: 0
   useScale: 1
@@ -9269,6 +9269,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 8300000, guid: f70dede14a24c0443bc40348599884f3, type: 3}
+  BossSoundEffects: []
 --- !u!81 &1776077981
 AudioListener:
   m_ObjectHideFlags: 0
@@ -9348,11 +9349,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 86c1cf63b9bdbb54dbc37fa87dd51813, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   Priority: 128

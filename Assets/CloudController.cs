@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CloudController : MonoBehaviour {
 
-    private const float CLOUD_SPEED = 0.0008f;
+    private const float CLOUD_SPEED = 0.0012f;
 
 	// Update is called once per frame
 	void Update () {

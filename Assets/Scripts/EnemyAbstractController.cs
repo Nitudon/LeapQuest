@@ -70,6 +70,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     {
         if (!IsAttacked && collision.gameObject.tag == "Hand")
         {
+            EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Damaged);
             gameObject.transform.DOKill();
             IsAttacked = true;
             OnAttacked(collision);
@@ -146,6 +147,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         _constantForce.enabled = true;
         _collider.enabled = false;
         yield return new WaitForSeconds(deathTime);
+        EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Death);
         GameObject _particle = Instantiate(DeathParticle, _transform.position, DeathParticle.transform.rotation) as GameObject;
         EnemyDestroy();
         yield return new WaitForSeconds(3f);

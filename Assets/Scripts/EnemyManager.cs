@@ -22,6 +22,8 @@ public class EnemyManager : MonoBehaviour {
     //出現データ
     private EnemySpawnTable[] _battleData = new EnemySpawnTable[BATTLE_NUMBER];
 
+    private AudioManager audioPlayer;
+
     //倒した数の監視、バトル遷移用
     [HideInInspector]
     public IntReactiveProperty EnemyNum;
@@ -40,6 +42,7 @@ public class EnemyManager : MonoBehaviour {
     void Init()
     {
         _enemyGenerator = new EnemyGenerator();
+        audioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         _enemyGenerator.Init();
         for(int i = 0; i < BATTLE_NUMBER; ++i)
         {
@@ -54,6 +57,11 @@ public class EnemyManager : MonoBehaviour {
             .Where(x => x == 0 && StepManager.Instance.battleStep<=5)
             .Delay(System.TimeSpan.FromSeconds(2f))
             .Subscribe(_ => StepManager.Instance.OnBattleEnd());
+    }
+
+    public void EnemySoundEffect(AudioManager.EnemySE effect)
+    {
+        audioPlayer.EnemySoundEffect(effect);
     }
 
     public void EnemyDestroy()

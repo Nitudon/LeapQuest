@@ -74,6 +74,7 @@ public class RockController : MonoBehaviour {
             if (this.tag == "Rock")
             {
                 isReflect = true;
+                EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Guard);
                 gameObject.transform.DOPath(RockPath(pathDirection.enemy), 3f, PathType.CatmullRom);
             }
 
