@@ -26,6 +26,8 @@ public class PlayerMover : MonoBehaviour{
     //プレイヤーを歩行させる
     public void OnPlayerWalk()
     {
+        //普段は普通に歩行、ボス戦前のみ左折処理を挟む
+
         if (StepManager.Instance.battleStep == 4)
         {
             Sequence seq = DOTween.Sequence();

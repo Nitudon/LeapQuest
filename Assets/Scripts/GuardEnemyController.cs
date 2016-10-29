@@ -6,10 +6,13 @@ using UniRx.Triggers;
 using System.Collections;
 using System;
 
+/// <summary>
+/// シールダーの行動スクリプト
+/// </summary>
 public class GuardEnemyController : EnemyAbstractController{
 
-    private bool isAttack = false;
-    private ParticleSystem GuardEffect;
+    private bool isAttack = false;//突進フラグ
+    private ParticleSystem GuardEffect;//ガードエフェクト
 
     protected override void Start()
     {
@@ -17,13 +20,14 @@ public class GuardEnemyController : EnemyAbstractController{
         GuardEffect = GetComponent<ParticleSystem>();
         base.Start();
 
-        Observable.Timer(TimeSpan.FromSeconds(6))
+        Observable.Timer(TimeSpan.FromSeconds(6))//6秒後に突進
             .Subscribe(_ => EnemyAttack());
     }
 
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        //プレイヤー攻撃時、突進中なら通常処理、そうでないならガード
         if (collision.gameObject.tag == "Hand")
         {
             if (isAttack)
@@ -40,6 +44,7 @@ public class GuardEnemyController : EnemyAbstractController{
        
     }
 
+    //ガードモーション解除
     void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.tag == "Hand")
@@ -64,6 +69,7 @@ public class GuardEnemyController : EnemyAbstractController{
             .OnComplete(() => Destroy(gameObject));
     }
 
+    //ガード処理
     private void Guard()
     {
         EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Guard);

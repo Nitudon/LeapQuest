@@ -13,60 +13,68 @@ namespace Leap.Unity
     [RequireComponent(typeof(HandPool))]
     public class TitleFadeController : MonoBehaviour
     {
+        #region[SerializeObjects]
         [SerializeField]
-        private CanvasGroup canvas;
-
-        [SerializeField]
-        private CanvasGroup logoCanvas;
+        private CanvasGroup canvas;//フェード用キャンバス
 
         [SerializeField]
-        private string fadeScene;
+        private CanvasGroup logoCanvas;//タイトル用にとみくロゴキャンバス
 
         [SerializeField]
-        private GameObject StartObject;
+        private string fadeScene;//遷移させるシーン先
 
         [SerializeField]
-        private GameObject EndObject;
+        private GameObject StartObject;//遷移決定オブジェクト
 
-        private List<HandPool.ModelGroup> handmodels;
-        private HandPool.ModelGroup handmodel;
-        private AudioManager audioPlayer;
-        private IHandModel leftModel;
-        private IHandModel rightModel;
+        [SerializeField]
+        private GameObject EndObject;//ゲーム終了決定オブジェクト
+        #endregion
 
+        private List<HandPool.ModelGroup> handmodels;//手のモデル集合
+        private HandPool.ModelGroup handmodel;//手のモデル
+        private AudioManager audioPlayer;//オーディオ
+        private IHandModel leftModel;//左手オブジェクト
+        private IHandModel rightModel;//右手オブジェクト
+
+        //指定オブジェクトのTriggerEnter監視
         private IObservable<UnityEngine.Collider> OnTriggerEnterObservable(GameObject obj)
         {
             return obj.OnTriggerEnterAsObservable()
             .Where(x => x.tag == "Hand");
         }
 
+        //指定オブジェクトのTriggerExit監視
         private IObservable<UnityEngine.Collider> OnTriggerExitObservable(GameObject obj)
         {
             return obj.OnTriggerExitAsObservable()
                .Where(x => x.tag == "Hand");
         }
 
+        //指定オブジェクトのTriggerについて、一定時間stayしているかどうかの監視
         private IObservable<long> OnTriggerHoldObservable(GameObject obj)
         {
             return
-                OnTriggerEnterObservable(obj)
-                .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(2)))
-                .TakeUntil(OnTriggerExitObservable(obj))
-                .RepeatUntilDestroy(this);
+                OnTriggerEnterObservable(obj)//Enter監視
+                .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(2)))//一定時間の監視
+                .TakeUntil(OnTriggerExitObservable(obj))//Exit監視でHoldしているかどうかの判定
+                .RepeatUntilDestroy(this);//ゲーム中に複数回の判定を行う
         }
 
+        //両手オブジェクトのガッツポーズ監視
         private IObservable<long> DoubleGutsObservable()
         {
             return Observable.EveryUpdate()
                 .Where(_ => isGuts(leftModel) && isGuts(rightModel));
         }
 
+        //両手オブジェクトのガッツポーズ解除監視
         private IObservable<long> DoubleGutsCancelObservable()
         {
             return Observable.EveryUpdate()
                 .Where(_ => !(isGuts(leftModel) && isGuts(rightModel)));
         }
 
+        //両手オブジェクトのガッツポーズの一定時間保持しているかの監視
         private IObservable<long> StartGutsObservable()
         {
             return
@@ -78,7 +86,7 @@ namespace Leap.Unity
 
         void Start()
         {
-
+            //タイトルシーンのみにとみくロゴをスプラッシュさせるため特殊処理
             if(Application.loadedLevelName == "Title")
             {
                 Sequence seq = DOTween.Sequence();
@@ -95,7 +103,7 @@ namespace Leap.Unity
             {
                 canvas.DOFade(0, 3f);
             }
-
+            //イニシャライズと遷移設定
             audioPlayer = transform.parent.GetComponent<AudioManager>();
             handmodels = GetComponent<HandPool>().ModelPool;
             handmodel = handmodels[0];
@@ -110,6 +118,7 @@ namespace Leap.Unity
                 .Subscribe(_ => Application.Quit());
         }
 
+        //ガッツポーズの判定
         private bool isGuts(IHandModel hand)
         {
             if (hand.GetLeapHand() != null)
@@ -120,6 +129,7 @@ namespace Leap.Unity
             else return false;
         }
 
+        //シーン遷移処理
         private void FadeScene()
         {
             audioPlayer.SoundEffect(AudioManager.SE.Trans);

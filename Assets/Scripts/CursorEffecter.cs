@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Imageの点滅スクリプト
+/// </summary>
+
 public class CursorEffecter : MonoBehaviour {
 	[SerializeField] float uplimit;
 	[SerializeField] float downlimit;

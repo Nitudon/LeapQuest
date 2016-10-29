@@ -4,23 +4,30 @@ using DG.Tweening;
 using System.Collections;
 using System;
 
+/// <summary>
+/// ボスの行動スクリプト
+/// </summary>
+/// 
 public class BossController :EnemyAbstractController{
 
-    private const int HIT_BREAK_POINT = 5;
-    private const int PUNCH_BREAK_POINT = 10;
-    private const int PUNCH_TIME = 7;
+    #region[Constant Parameter]
+    private const int HIT_BREAK_POINT = 5;//第一形態のHP初期値
+    private const int PUNCH_BREAK_POINT = 10;//第二形態の突進HP初期値
+    private const int PUNCH_TIME = 7;//第二形態の攻撃間隔
+    #endregion
 
     [SerializeField]
-    private GameObject AttackRock;
+    private GameObject AttackRock;//投げる岩
 
-    private int breakPoint;
-    private int punchPoint;
-    private Vector3 bossPosition;
-    private bool isBreak;
-    private bool isPunch;
+    private int breakPoint;//第一形態のHP
+    private int punchPoint;//第二形態の突進HP
+    private Vector3 bossPosition;//ボスの定位置
+    private bool isBreak;//ショックフラグ
+    private bool isPunch;//パンチフラグ
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        //突進中に攻撃を受けた時の処理
         if(!isPunch && _enemyLife > 0 &&  punchPoint > 0 && collision.gameObject.tag == "Hand" && _animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
         {
             punchPoint--;
@@ -37,12 +44,14 @@ public class BossController :EnemyAbstractController{
     protected override IEnumerator EnemyDeath()
     {
         GameObject _particle = Instantiate(DeathParticle, _transform.position, DeathParticle.transform.rotation) as GameObject;
+        EnemyManager.Instance.EnemySoundEffect(AudioManager.EnemySE.Death);
         EnemyDestroy();
         yield return new WaitForSeconds(3f);
         Destroy(_particle);
         yield break;
     }
 
+    //突進中に攻撃されたときのコルーチン
     private IEnumerator PunchCoroutine()
     {
         isPunch = true;
@@ -59,6 +68,7 @@ public class BossController :EnemyAbstractController{
         isPunch = false;
     }
 
+    //ボス消滅時のコルーチン
     private IEnumerator BossDeathCoroutine()
     {
         yield return new WaitForSeconds(2f);
@@ -68,6 +78,7 @@ public class BossController :EnemyAbstractController{
 
     protected override void OnTriggerEnter(Collider collider)
     {
+        //跳ね返ってきた岩、突進によるプレイヤーダメージなどの処理
         if (!isBreak && collider.tag == "Rock")
         {
             if (collider.GetComponent<RockController>().isReflect)
@@ -103,6 +114,7 @@ public class BossController :EnemyAbstractController{
         base.Start();
     }
 
+    //岩投げ攻撃
     protected IEnumerator RockAttack()
     {
         _animator.SetTrigger("Rock");
@@ -114,6 +126,7 @@ public class BossController :EnemyAbstractController{
 
     protected override void EnemyBehave()
     {
+        //形態によるルーチンの仕分け
         if (!isBreak)
         {
             StartCoroutine(RockAttack());
@@ -124,6 +137,7 @@ public class BossController :EnemyAbstractController{
         }
     }
 
+    //形態の監視
     private IObservable<long> BreakObservable()
     {
         var observable = Observable.EveryUpdate()
@@ -132,6 +146,7 @@ public class BossController :EnemyAbstractController{
         return observable;
     }
 
+    //形態の処理Observable、各形態の行動と、形態遷移
     protected override IDisposable EnemyRoutineDisposable()
     {
         var disposable = Observable.Interval(System.TimeSpan.FromSeconds(BEHAVE_TIME))
@@ -147,6 +162,7 @@ public class BossController :EnemyAbstractController{
         return disposable;
     }
 
+    //形態の変化
     private void ModeChange()
     {
         Observable.Interval(System.TimeSpan.FromSeconds(PUNCH_TIME))
@@ -160,6 +176,7 @@ public class BossController :EnemyAbstractController{
         throw new NotImplementedException();
     }
 
+    //攻撃時のコルーチン
     private IEnumerator EnemyAttackCoroutine()
     {
         punchPoint = PUNCH_BREAK_POINT;

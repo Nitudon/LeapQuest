@@ -17,6 +17,7 @@ public class Player{
         _life.Value = START_LIFE;
     }
 
+    //ダメージ処理
     public void LifeAffect(int point)
     {
         _life.Value -= point;

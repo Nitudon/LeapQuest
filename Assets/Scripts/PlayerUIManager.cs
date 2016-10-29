@@ -65,6 +65,7 @@ public class PlayerUIManager : MonoBehaviour {
         }
     }
 
+    //ゲームオーバー処理
     private void GameOver()
     {
         StepManager.Instance.GameOverStep();
@@ -92,6 +93,7 @@ public class PlayerUIManager : MonoBehaviour {
         }
     }
 
+    //歩行処理
     public void OnPlayerWalk()
     {
         _playerMover.OnPlayerWalk();

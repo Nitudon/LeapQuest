@@ -3,21 +3,26 @@ using UniRx;
 using UniRx.Triggers;
 using System.Collections;
 
+/// <summary>
+/// キャラ説明パネルの操作
+/// </summary>
+/// 
 public class HandlePanel : MonoBehaviour {
 
-    private GameObject leftCollider;
-    private GameObject rightCollider;
+    private GameObject leftCollider;//左送りのボタン
+    private GameObject rightCollider;//右送りのボタン
 
-    private int exaIndex;
-
-    [SerializeField]
-    private GameObject[] exaPanels;
+    private int exaIndex;//現在表示されている情報
 
     [SerializeField]
-    private GameObject[] exaObjects;
+    private GameObject[] exaPanels;//説明パネル
+
+    [SerializeField]
+    private GameObject[] exaObjects;//説明している敵のオブジェクト
 
     public enum Dir { left,right}
 
+    //右送り
     private void UIChangeRight()
     {
             exaObjects[exaIndex].SetActive(false);
@@ -33,6 +38,7 @@ public class HandlePanel : MonoBehaviour {
        
     }
 
+    //左送り
     private void UIChangeLeft()
     {
         exaObjects[exaIndex].SetActive(false);
@@ -47,6 +53,7 @@ public class HandlePanel : MonoBehaviour {
         exaPanels[exaIndex].SetActive(true);
     }
 
+    //連続処理対策
     private IEnumerator WaitSetActive()
     {
         yield return new WaitForSeconds(0.5f);

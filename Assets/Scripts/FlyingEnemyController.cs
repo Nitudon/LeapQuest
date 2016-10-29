@@ -3,6 +3,10 @@ using DG.Tweening;
 using System.Collections;
 using System;
 
+/// <summary>
+/// ふわふわデビルの行動スクリプト
+/// </summary>
+
 public class FlyingEnemyController : EnemyAbstractController {
 
     protected override void Start()
@@ -13,6 +17,7 @@ public class FlyingEnemyController : EnemyAbstractController {
 
     protected override void EnemyBehave()
     {
+        //ふわふわと突進
         transform.DOKill();
 
         Sequence seq = DOTween.Sequence();

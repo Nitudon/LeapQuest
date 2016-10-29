@@ -59,11 +59,13 @@ public class EnemyManager : MonoBehaviour {
             .Subscribe(_ => StepManager.Instance.OnBattleEnd());
     }
 
+    //Enemyに関する音声処理
     public void EnemySoundEffect(AudioManager.EnemySE effect)
     {
         audioPlayer.EnemySoundEffect(effect);
     }
 
+    //消滅処理
     public void EnemyDestroy()
     {
         EnemyNum.Value--;

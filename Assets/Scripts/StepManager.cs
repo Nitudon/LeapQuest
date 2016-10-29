@@ -71,18 +71,19 @@ public class StepManager : MonoBehaviour {
         }
     }
 
-    private const float TEXTPANEL_FADE_IN = -335f;
-    private const float TEXTPANEL_FADE_OUT = -575f;
+    private const float TEXTPANEL_FADE_IN = -335f;//バトルコメントパネルの位置
+    private const float TEXTPANEL_FADE_OUT = -575f;//バトルコメントパネルの待機位置
 
     public int battleStep { get; private set; }//現在のバトルステップ
-    private GameObject[] Handpalm;
-    private GameObject PauseObject;
-    private GameObject PauseTint;
+    private GameObject[] Handpalm;//手のオブジェクト
+    private GameObject PauseObject;//ポーズ時に表示するオブジェクト
+    private GameObject PauseTint;//ポーズ表示UI
     private AudioManager audioPlayer;//BGM管理
     private UIManager UICanvas;//バトルヘッダー
-    private CanvasGroup FadeCanvas;
-    private GameObject BattleCommentPanel;
-    private Text[] BattleComments;
+    private CanvasGroup FadeCanvas;//フェード用のキャンバス
+    private GameObject BattleCommentPanel;//バトルコメントを表示するパネル
+    private Text[] BattleComments;//バトルコメントのオブジェクト
+
     //バトル終了、及び最初の移動
     public void OnWalk()
     {
@@ -90,6 +91,7 @@ public class StepManager : MonoBehaviour {
         audioPlayer.SoundChange(AudioManager.Music.walk);
     }
 
+    //バトル終了処理
     public void OnBattleEnd()
     {
         BattleComments[battleStep - 1].gameObject.SetActive(false);
@@ -105,12 +107,14 @@ public class StepManager : MonoBehaviour {
         }
     }
 
+    //ゲームクリア処理
     public void GameClearStep()
     {
         FadeCanvas.DOFade(1, 3f)
         .OnComplete(() => SceneManager.LoadScene("GameClear"));
     }
 
+    //ゲームオーバー処理
     public void GameOverStep()
     {
         FadeCanvas.DOFade(1, 3f)
@@ -135,6 +139,7 @@ public class StepManager : MonoBehaviour {
         }
     }
 
+    //バトルコメントの表示コルーチン
     private IEnumerator BattleComment()
     {
         BattleComments[battleStep].gameObject.SetActive(true);
@@ -145,6 +150,7 @@ public class StepManager : MonoBehaviour {
 
     }
 
+    //ポーズ処理
     private void OnPause(GameObject obj)
     {
 

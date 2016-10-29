@@ -12,7 +12,9 @@ using UniRx;
  * Death:消滅
 */
 public abstract class EnemyAbstractController : MonoBehaviour {
-
+    /// <summary>
+    /// パラメータの外部設定
+    /// </summary>
     #region[SerializeMembers]
     [SerializeField]
     protected GameObject DeathParticle;
@@ -39,10 +41,10 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         get { return IsAttacked; }
     }
 
-    private const float INVICIBLE_TIME = 0.5f;
-    protected readonly Vector3 DEATH_SMASH_DISTANCE = new Vector3(0f,0.7f,0.2f);
-    private bool IsAttacked;
-    private bool IsDeath;
+    private const float INVICIBLE_TIME = 0.5f;//被攻撃時の無敵時間
+    protected readonly Vector3 DEATH_SMASH_DISTANCE = new Vector3(0f,0.7f,0.2f);//消滅時の衝撃で移動する距離
+    private bool IsAttacked;//被攻撃フラグ
+    private bool IsDeath;//消滅フラグ
 
     #region[DamageParameter]
     private const float DAMAGE_DURATION = 1f;//ダメージを受けているときの時間
@@ -52,15 +54,15 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     #endregion
 
     #region[Protected Parameter]
-    protected float BEHAVE_TIME = 2f;
-    protected int ATTACK_DAMAGE = 1;
-    protected Animator _animator;
+    protected float BEHAVE_TIME = 2f;//ルーチンの実行間隔
+    protected int ATTACK_DAMAGE = 1;//敵の攻撃力
+    protected Animator _animator;//各キャッシュ
     protected Rigidbody _rigitbody;
     protected Collider _collider;
     protected ConstantForce _constantForce;
     protected Transform _transform;
-    protected int _enemyLife;
-    protected Vector3 pos;
+    protected int _enemyLife;//敵HP
+    protected Vector3 pos;//プレイヤーポジションキャッシュ
     #endregion
     
     #endregion
@@ -79,6 +81,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
 
     }
 
+     /** プレイヤーの領域まで達した時のダメージ処理*/
     protected virtual void OnTriggerEnter(Collider collider)
     {
         if(collider.tag == "Player")
@@ -88,6 +91,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         }
     }
 
+     /** 敵の被攻撃時のアクション*/
     protected void OnAttackedShake()
     {
         transform.DOShakePosition(DAMAGE_DURATION, DAMAGE_POWER, DAMAGE_SHAKE, DAMAGE_SHAKE_ANGLERANGE);
@@ -135,12 +139,6 @@ public abstract class EnemyAbstractController : MonoBehaviour {
     /** 敵の攻撃ルーチン*/
     protected abstract void EnemyAttack();
 
-    /** 敵のターン終了ルーチン*/
-    protected virtual void EnemyEnd()
-    {
-        Destroy(gameObject);
-    }
-
     /** 消滅時の処理*/
     protected virtual IEnumerator EnemyDeath()
     {
@@ -155,6 +153,7 @@ public abstract class EnemyAbstractController : MonoBehaviour {
         yield break;
     }
 
+    /** 消滅カウント処理*/
     protected virtual void EnemyDestroy()
     {
         EnemyManager.Instance.EnemyDestroy();

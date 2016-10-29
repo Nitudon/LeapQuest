@@ -4,14 +4,19 @@ using System.Collections;
 
 public class RockController : MonoBehaviour {
 
-    private Vector3 enemyPos;
-    private Vector3 cameraPos;
+    /// <summary>
+    /// 岩のコントローラースクリプト
+    /// </summary>
+
+    
+    private Vector3 enemyPos;//敵の位置
+    private Vector3 cameraPos;//プレイヤーの位置
 
     [SerializeField]
-    private GameObject ExplosionParticle;
+    private GameObject ExplosionParticle;//爆散エフェクト
 
     [HideInInspector]
-    public bool isReflect { get; private set; }
+    public bool isReflect { get; private set; }//反射フラグ
 
     enum pathDirection {player,enemy}
 
@@ -20,25 +25,15 @@ public class RockController : MonoBehaviour {
         enemyPos = gameObject.transform.position;
         isReflect = false;
 
-        gameObject.transform.DOPath(RockPath(pathDirection.player), RockSpeed(), PathType.CatmullRom);
+        gameObject.transform.DOPath(RockPath(pathDirection.player), 3f, PathType.CatmullRom);
            
     }
 
-    private float RockSpeed()
-    {
-        if(this.tag == "Rock")
-        {
-            return 3f;
-        }
-
-        else
-        {
-            return 5f;
-        }
-    }
-
+    //岩の軌道
     Vector3[] RockPath(pathDirection dir)
     {
+        //ボスからプレイヤー、プレイヤーからボスへの岩の軌道を演算し返す
+
         Vector3[] _path;
         cameraPos = GameObject.FindGameObjectWithTag("Player").transform.position;
 
@@ -59,8 +54,10 @@ public class RockController : MonoBehaviour {
         return _path;
     }
 
+
     void OnTriggerEnter(Collider collider)
     {
+        //プレイヤーにあたったとき、反射させたときの処理
         if(collider.tag == "Player")
         {
             gameObject.transform.DOKill();
