@@ -706,11 +706,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackSounds: []
-  SoundEffects:
-  - {fileID: 0}
+  PlayerSoundEffects:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 8300000, guid: f70dede14a24c0443bc40348599884f3, type: 3}
+  EnemySoundEffects: []
 --- !u!82 &238628410
 AudioSource:
   m_ObjectHideFlags: 0

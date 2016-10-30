@@ -12,7 +12,7 @@ public class BossController :EnemyAbstractController{
 
     #region[Constant Parameter]
     private const int HIT_BREAK_POINT = 5;//第一形態のHP初期値
-    private const int PUNCH_BREAK_POINT = 10;//第二形態の突進HP初期値
+    private const int PUNCH_BREAK_POINT = 15;//第二形態の突進HP初期値
     private const int PUNCH_TIME = 7;//第二形態の攻撃間隔
     #endregion
 

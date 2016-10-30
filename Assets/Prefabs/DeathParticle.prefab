@@ -1992,7 +1992,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -982946023
+  randomSeed: -1089761538
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -7164,7 +7164,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -750652023
+  randomSeed: -1373470441
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -8888,7 +8888,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -1773219852
+  randomSeed: 17528798
   InitialModule:
     serializedVersion: 2
     enabled: 1

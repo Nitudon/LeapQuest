@@ -8,7 +8,7 @@ public class Player{
      * ライフなどのPlayer情報管理
      * 
       */
-    public readonly int START_LIFE = 20;
+    public readonly int START_LIFE = 25;
     public IntReactiveProperty _life { get; private set; }
 
     public Player()

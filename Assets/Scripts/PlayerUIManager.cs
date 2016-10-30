@@ -58,7 +58,7 @@ public class PlayerUIManager : MonoBehaviour {
                     .Subscribe(_ => _instance.GameOver());
 
                 Observable.EveryUpdate()
-                    .Where(_ => Input.GetKeyDown(KeyCode.Space))
+                    .Where(_ => Input.GetKeyDown(KeyCode.L))
                     .Subscribe(_ => _instance._player.LifeAffect(-99));
             }
             return _instance;

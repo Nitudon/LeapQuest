@@ -57,7 +57,8 @@ namespace Leap.Unity
                 OnTriggerEnterObservable(obj)//Enter監視
                 .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(2)))//一定時間の監視
                 .TakeUntil(OnTriggerExitObservable(obj))//Exit監視でHoldしているかどうかの判定
-                .RepeatUntilDestroy(this);//ゲーム中に複数回の判定を行う
+                .RepeatUntilDestroy(this)//ゲーム中に複数回の判定を行う
+                .First();
         }
 
         //両手オブジェクトのガッツポーズ監視
@@ -86,6 +87,13 @@ namespace Leap.Unity
 
         void Start()
         {
+            //イニシャライズと遷移設定
+            audioPlayer = transform.parent.GetComponent<AudioManager>();
+            handmodels = GetComponent<HandPool>().ModelPool;
+            handmodel = handmodels[0];
+            leftModel = handmodel.LeftModel;
+            rightModel = handmodel.RightModel;
+
             //タイトルシーンのみにとみくロゴをスプラッシュさせるため特殊処理
             if(Application.loadedLevelName == "Title")
             {
@@ -103,19 +111,15 @@ namespace Leap.Unity
             {
                 canvas.DOFade(0, 3f);
             }
-            //イニシャライズと遷移設定
-            audioPlayer = transform.parent.GetComponent<AudioManager>();
-            handmodels = GetComponent<HandPool>().ModelPool;
-            handmodel = handmodels[0];
-            leftModel = handmodel.LeftModel;
-            rightModel = handmodel.RightModel;
+                   
+                OnTriggerHoldObservable(StartObject)
+                    .First()
+                    .Subscribe(_ => FadeScene());
 
-            OnTriggerHoldObservable(StartObject)
-                .Subscribe(_ => FadeScene());
-
-            OnTriggerHoldObservable(EndObject)
-                .First()
-                .Subscribe(_ => Application.Quit());
+                OnTriggerHoldObservable(EndObject)
+                    .First()
+                    .Subscribe(_ => Application.Quit());
+                   
         }
 
         //ガッツポーズの判定

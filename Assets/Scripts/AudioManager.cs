@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// 音楽処理、対応した音声の再生
 /// </summary>
-[RequireComponent(typeof(AudioSource))]
+
 public class AudioManager : MonoBehaviour {
     #region[SerializeParameter]
     [SerializeField]
@@ -27,7 +27,11 @@ public class AudioManager : MonoBehaviour {
     private AudioSource _audioSource;//オーディオ
 	// Use this for initialization
 	void Start () {
-        _audioSource = GetComponent<AudioSource>();
+        if(Application.loadedLevelName == "Main")
+        _audioSource = transform.parent.GetComponent<AudioSource>();
+        else
+            _audioSource = transform.GetComponent<AudioSource>();
+        
 	}
 	
     //BGM再生

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityStandardAssets.ImageEffects;
 using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
@@ -14,27 +15,6 @@ using DG.Tweening;
 /// </summary>
 public class StepManager : MonoBehaviour {
 
-     private IObservable<UnityEngine.Collider> OnTriggerEnterObservable(GameObject obj)
-    {
-        return obj.OnTriggerEnterAsObservable()
-            .Where(x => x.gameObject == PauseObject);
-    }
-
-    private IObservable<UnityEngine.Collider> OnTriggerExitObservable(GameObject obj)
-    {
-        return obj.OnTriggerExitAsObservable()
-           .Where(x => x.gameObject == PauseObject);
-    }
-
-    private IObservable<long> OnTriggerHoldObservable(GameObject obj)
-    {
-        return
-            OnTriggerEnterObservable(obj)
-            .SelectMany(_ => Observable.Timer(System.TimeSpan.FromSeconds(2)))
-            .TakeUntil(OnTriggerExitObservable(obj))
-            .RepeatUntilDestroy(this);
-    }
-
     //instance
     private static StepManager _instance;
 
@@ -44,23 +24,40 @@ public class StepManager : MonoBehaviour {
         _instance = GameObject.FindGameObjectWithTag("StepManager").GetComponent<StepManager>();
         _instance.audioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         _instance.UICanvas = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
-        _instance.PauseObject = GameObject.Find("StartObject");
-        _instance.PauseTint = UICanvas.transform.FindChild("PauseTint").gameObject;
         _instance.FadeCanvas = GameObject.FindGameObjectWithTag("Fade").GetComponent<CanvasGroup>();
-        _instance.BattleCommentPanel = GameObject.Find("TextPanel");
-        _instance.BattleComments = BattleCommentPanel.GetComponentsInChildren<Text>(true);
-        _instance.Handpalm = GameObject.FindGameObjectsWithTag("Hand");
+        _instance.PauseBlur = GameObject.FindGameObjectWithTag("Player").GetComponent<Blur>();
+        _instance.TransObjects = GameObject.Find("TransObjects");
+        _instance.TransObjects.SetActive(false);
         _instance.battleStep = 0;
+        _instance.PauseIndex = new IntReactiveProperty();
+        _instance.PauseIndex.Value = 0;
         
         //スタート
         FadeCanvas.DOFade(0,3f)
         .OnComplete(() =>PlayerUIManager.Instance.OnPlayerWalk());
 
-        foreach (GameObject obj in Handpalm)
-        {
-            OnTriggerHoldObservable(obj)
-            .Subscribe(_ => OnPause(obj));
-        }
+        //ポーズ関連
+
+        PauseIndex
+            .Where(_ => Time.timeScale == 0)
+            .Subscribe(_ => UICanvas.OnPauseMenu(PauseIndex.Value % 3));
+
+        Observable.EveryUpdate()
+            .Where(_ => (Time.timeScale == 0) && (Input.GetKeyDown(KeyCode.Z)))
+            .Subscribe(_ => OnPauseMenu((PauseMenu)(PauseIndex.Value % 3)));
+
+        Observable.EveryUpdate()
+            .Where(_ => Input.GetKeyDown(KeyCode.Space))
+            .Subscribe(_ => OnPause());
+
+        Observable.EveryUpdate()
+            .Where(_ => (Time.timeScale == 0) && (Input.GetKeyDown(KeyCode.UpArrow) && PauseIndex.Value > 0))
+            .Subscribe(_ => PauseIndex.Value--);
+
+        Observable.EveryUpdate()
+            .Where(_ => (Time.timeScale == 0) && (Input.GetKeyDown(KeyCode.DownArrow)))
+            .Subscribe(_ => PauseIndex.Value++);
+
     }
 
     //get_instance
@@ -71,19 +68,15 @@ public class StepManager : MonoBehaviour {
         }
     }
 
-    private const float TEXTPANEL_FADE_IN = -335f;//バトルコメントパネルの位置
-    private const float TEXTPANEL_FADE_OUT = -575f;//バトルコメントパネルの待機位置
-
     public int battleStep { get; private set; }//現在のバトルステップ
-    private GameObject[] Handpalm;//手のオブジェクト
-    private GameObject PauseObject;//ポーズ時に表示するオブジェクト
-    private GameObject PauseTint;//ポーズ表示UI
+    private GameObject PauseObject;//ポーズトリガーオブジェクト
+    private GameObject TransObjects;//ポーズ時に表示するオブジェクト
+    private Blur PauseBlur;
     private AudioManager audioPlayer;//BGM管理
     private UIManager UICanvas;//バトルヘッダー
     private CanvasGroup FadeCanvas;//フェード用のキャンバス
-    private GameObject BattleCommentPanel;//バトルコメントを表示するパネル
-    private Text[] BattleComments;//バトルコメントのオブジェクト
-
+    private IntReactiveProperty PauseIndex;
+    public enum PauseMenu { pauseback,retry,end}
     //バトル終了、及び最初の移動
     public void OnWalk()
     {
@@ -94,7 +87,7 @@ public class StepManager : MonoBehaviour {
     //バトル終了処理
     public void OnBattleEnd()
     {
-        BattleComments[battleStep - 1].gameObject.SetActive(false);
+        UICanvas.OnBattleEnd(battleStep - 1);
 
         if (battleStep < 5)
         {
@@ -124,9 +117,8 @@ public class StepManager : MonoBehaviour {
     //ステップ更新とバトル通知
     public void OnBattle()
     {
-        StartCoroutine(BattleComment());
+        
         EnemyManager.Instance.BattleStart(battleStep);
-        BattleComments[battleStep].gameObject.SetActive(true);
         UICanvas.OnBattle(++battleStep);
         if (battleStep < 5)
         {
@@ -139,34 +131,44 @@ public class StepManager : MonoBehaviour {
         }
     }
 
-    //バトルコメントの表示コルーチン
-    private IEnumerator BattleComment()
+    private void OnPauseMenu(PauseMenu index)
     {
-        BattleComments[battleStep].gameObject.SetActive(true);
-        BattleCommentPanel.transform.DOLocalMoveY(TEXTPANEL_FADE_IN,1f);
-        yield return new WaitForSeconds(10f);
-        BattleCommentPanel.transform.DOLocalMoveY(TEXTPANEL_FADE_OUT, 3f);
-        yield break;
+        switch (index)
+        {
+            case PauseMenu.pauseback:
+                OnPause();
+                break;
 
+            case PauseMenu.retry:
+                Time.timeScale = 1;
+                SceneManager.LoadScene("Main");
+                break;
+
+            case PauseMenu.end:
+                Application.Quit();
+                break;
+        }
     }
 
     //ポーズ処理
-    private void OnPause(GameObject obj)
+    public void OnPause()
     {
-
         if(Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            PauseTint.SetActive(false);
+            UICanvas.OnPause(true);
+            TransObjects.SetActive(false);
+            PauseBlur.enabled = false;
+            
         }
         else
         {
             Time.timeScale = 0;
-            PauseTint.SetActive(true);
+            UICanvas.OnPause(false);
+            TransObjects.SetActive(true);
+            PauseBlur.enabled = true;
         }
 
-        OnTriggerHoldObservable(obj)
-            .Subscribe(_ => OnPause(obj));
     }
 
 }
