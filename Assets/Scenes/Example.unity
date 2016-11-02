@@ -9490,7 +9490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 0.45
-  intensity: 0.38
+  intensity: 0
   blurSize: 2.49
   blurIterations: 2
   blurType: 0
