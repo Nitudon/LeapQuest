@@ -11,7 +11,13 @@ public class UIManager : MonoBehaviour,IBattleMessage {
     {
         25f,
         -220f,
-        -465f
+        -445f
+    };
+
+    private readonly Vector3[] BATTLEHEADER_POSITION = new Vector3[]
+   {
+       new Vector3(-63.8f,65.4f,0f),
+       new Vector3(-63.8f,2565.4f,0f)
     };
     private const float TEXTPANEL_FADE_IN = -335f;//バトルコメントパネルの位置
     private const float TEXTPANEL_FADE_OUT = -575f;//バトルコメントパネルの待機位置
@@ -44,7 +50,7 @@ public class UIManager : MonoBehaviour,IBattleMessage {
     //ポーズ処理
     public void OnPause(bool pause)
     {
-        BattleHeader.gameObject.SetActive(pause);
+        BattleHeader.transform.localPosition =  (pause) ?BATTLEHEADER_POSITION[0] : BATTLEHEADER_POSITION[1];
         PlayerGaze.SetActive(pause);
         BattleCommentPanel.SetActive(pause);
         PauseTint.SetActive(!pause);

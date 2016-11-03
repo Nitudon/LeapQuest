@@ -40,23 +40,28 @@ public class StepManager : MonoBehaviour {
 
         PauseIndex
             .Where(_ => Time.timeScale == 0)
-            .Subscribe(_ => UICanvas.OnPauseMenu(PauseIndex.Value % 3));
+            .Subscribe(_ => UICanvas.OnPauseMenu(PauseIndex.Value % 3))
+            .AddTo(gameObject);
 
         Observable.EveryUpdate()
             .Where(_ => (Time.timeScale == 0) && (Input.GetKeyDown(KeyCode.Z)))
-            .Subscribe(_ => OnPauseMenu((PauseMenu)(PauseIndex.Value % 3)));
+            .Subscribe(_ => OnPauseMenu((PauseMenu)(PauseIndex.Value % 3)))
+            .AddTo(gameObject);
 
         Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
-            .Subscribe(_ => OnPause());
+            .Subscribe(_ => OnPause())
+            .AddTo(gameObject);
 
         Observable.EveryUpdate()
             .Where(_ => (Time.timeScale == 0) && (Input.GetKeyDown(KeyCode.UpArrow) && PauseIndex.Value > 0))
-            .Subscribe(_ => PauseIndex.Value--);
+            .Subscribe(_ => PauseIndex.Value--)
+            .AddTo(gameObject);
 
         Observable.EveryUpdate()
             .Where(_ => (Time.timeScale == 0) && (Input.GetKeyDown(KeyCode.DownArrow)))
-            .Subscribe(_ => PauseIndex.Value++);
+            .Subscribe(_ => PauseIndex.Value++)
+            .AddTo(gameObject);
 
     }
 

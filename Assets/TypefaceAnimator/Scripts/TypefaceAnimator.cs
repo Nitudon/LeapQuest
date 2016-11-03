@@ -406,9 +406,19 @@ public class TypefaceAnimator : BaseMeshEffect
 
 				if (useColor)
 				{
-					float temp = colorAnimationCurve.Evaluate(SeparationRate (progress, currentCharacterNumber, characterNumber, colorSeparation));
-					col = (colorTo - colorFrom) * temp + colorFrom;
-					uiVertex0.color = uiVertex1.color = uiVertex2.color = uiVertex3.color = col;
+                    if (Time.timeScale == 0)
+                    {
+                        uiVertex0.color = Color.clear;
+                        uiVertex1.color = Color.clear;
+                        uiVertex2.color = Color.clear;
+                        uiVertex3.color = Color.clear;
+                    }
+                    else
+                    {
+                        float temp = colorAnimationCurve.Evaluate(SeparationRate(progress, currentCharacterNumber, characterNumber, colorSeparation));
+                        col = (colorTo - colorFrom) * temp + colorFrom;
+                        uiVertex0.color = uiVertex1.color = uiVertex2.color = uiVertex3.color = col;
+                    }
 				}
 				
 				if(useAlpha)
